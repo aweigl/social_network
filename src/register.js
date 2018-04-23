@@ -24,8 +24,14 @@ export class Register extends React.Component {
                     password: this.password
                 };
                 console.log(userInfo);
-                axios.post("/register", userInfo).then(data => {
-                    console.log("Hurray");
+                axios.post("/register", userInfo).then(response => {
+                    if (response.data.success) {
+                        location.replace("/");
+                    } else {
+                        this.setState({
+                            error: true
+                        });
+                    }
                 });
             })
             .catch(e => {
@@ -50,6 +56,11 @@ export class Register extends React.Component {
     render() {
         return (
             <div>
+                {this.state.error && (
+                    <div className="postError">
+                        Something went wrong, please try again
+                    </div>
+                )}
                 <div>
                     <label htmlFor="first">First Name</label>
                     <input name="first" onChange={this.inputChange} />
