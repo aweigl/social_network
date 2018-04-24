@@ -5,8 +5,8 @@ import { Logo } from "./logo.js";
 import { Register } from "./register.js";
 let component;
 
-if (location.pathname == "/register") {
-    component = <Register />;
+if (location.pathname == "/welcome") {
+    component = <Welcome />;
 } else {
     component = <Logo />;
 }
