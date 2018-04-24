@@ -47,7 +47,7 @@ app.use(express.static(__dirname + "/public"));
 
 ////LOGIN REQUIRED///////
 function requireLogin() {
-    if (!req.session.user) {
+    if (!req.session.userId) {
         res.sendStatus(403);
     } else {
         next();
@@ -90,20 +90,19 @@ app.post("/login", (req, res) => {
                 });
             } else {
                 req.session.userId = response.rows[0].id;
-                checkPassword(req.body.password, response.rows[0].pass).then(
-                    response => {
+                checkPassword(req.body.password, response.rows[0].pass)
+                    .then(response => {
+                        console.log(response);
                         if (response) {
                             res.json({
                                 success: true,
                                 logged: req.session.userId
                             });
-                        } else {
-                            res.json({
-                                success: false
-                            });
                         }
-                    }
-                );
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
             }
         })
         .catch(e => {

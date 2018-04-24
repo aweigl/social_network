@@ -7,25 +7,22 @@ import { HashRouter, Route } from "react-router-dom";
 
 export function Welcome() {
     return (
-        <div className="welcome" style={welcomeStyle}>
-            <h1>THIS IS WHERE MY SOCIAL NETWORK IS GROWING</h1>
-            <img src="/logo.png" style={imgStyle} />
-            <HashRouter>
-                <div>
-                    <Route exact path="/" component={Register} />
-                    <Route path="/login" component={Login} />
-                </div>
-            </HashRouter>
+        <div>
+            <div className="input">
+                <HashRouter>
+                    <div>
+                        <Route exact path="/" component={Register} />
+                        <Route path="/login" component={Login} />
+                    </div>
+                </HashRouter>
+            </div>
+            <div className="welcome">
+                <h1 id="header">ArticleSwap</h1>
+                <img id="logo" src="/logo.png" />
+                <h3 id="slogan">
+                    A place to discuss and swap scientific articles!
+                </h3>
+            </div>
         </div>
     );
 }
-
-export const imgStyle = {
-    justifySelf: "center"
-};
-
-const welcomeStyle = {
-    display: "grid",
-    gridTemplateRows: "repeat(3, auto)",
-    justifyContent: "center"
-};

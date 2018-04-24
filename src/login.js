@@ -1,9 +1,6 @@
 import React from "react";
 import axios from "../axios";
-
-const registerStyle = {
-    justifySelf: "center"
-};
+import { Link } from "react-router-dom";
 
 export class Login extends React.Component {
     constructor(props) {
@@ -24,8 +21,7 @@ export class Login extends React.Component {
         axios
             .post("/login", userInfo)
             .then(response => {
-                if (response.success) {
-                    console.log("user true");
+                if (response.data.success) {
                     location.replace("/");
                 } else {
                     this.setState({
@@ -39,21 +35,32 @@ export class Login extends React.Component {
     }
     render() {
         return (
-            <div className="register" style={registerStyle}>
+            <div className="register" id="login">
                 {this.state.error && (
                     <div className="loginError">
                         Something went wrong, please try again
                     </div>
                 )}
-                <div>
-                    <label htmlFor="mail">E-mail</label>
-                    <input name="mail" onChange={this.inputChange} />
+                <div id="loginMail">
+                    <input
+                        placeholder="E-mail"
+                        name="mail"
+                        onChange={this.inputChange}
+                    />
                 </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input name="password" onChange={this.inputChange} />
+                <div id="loginPassword">
+                    <input
+                        placeholder="Password"
+                        name="password"
+                        onChange={this.inputChange}
+                    />
                 </div>
                 <button onClick={this.submit}>Login</button>
+                <div id="registerButton">
+                    <Link to="/">
+                        <button>Register!</button>
+                    </Link>
+                </div>
             </div>
         );
     }

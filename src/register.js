@@ -34,42 +34,46 @@ export class Register extends React.Component {
     }
     render() {
         return (
-            <div className="register" style={registerStyle}>
-                {this.state.error && (
-                    <div className="postError">
-                        Something went wrong, please try again
+            <div>
+                <div className="register">
+                    {this.state.error && (
+                        <div className="postError">
+                            Something went wrong, please try again
+                        </div>
+                    )}
+
+                    <input
+                        placeholder="First name"
+                        name="first"
+                        onChange={this.inputChange}
+                    />
+
+                    <input
+                        placeholder="Last name"
+                        name="last"
+                        onChange={this.inputChange}
+                    />
+
+                    <input
+                        placeholder="E-mail"
+                        name="mail"
+                        onChange={this.inputChange}
+                    />
+
+                    <input
+                        placeholder="Password"
+                        name="password"
+                        onChange={this.inputChange}
+                    />
+
+                    <button onClick={this.submit}>Register</button>
+                    <div id="loginMember">
+                        <Link to="/login">
+                            <button>Log in!</button>
+                        </Link>
                     </div>
-                )}
-                <div>
-                    <label htmlFor="first">First Name</label>
-                    <input name="first" onChange={this.inputChange} />
-                </div>
-                <div>
-                    <label htmlFor="last">Last Name</label>
-                    <input name="last" onChange={this.inputChange} />
-                </div>
-                <div>
-                    <label htmlFor="mail">E-mail</label>
-                    <input name="mail" onChange={this.inputChange} />
-                </div>
-                <div>
-                    <label htmlFor="password">Password</label>
-                    <input name="password" onChange={this.inputChange} />
-                </div>
-                <button onClick={this.submit}>Register</button>
-                <div>
-                    If you are already member, please
-                    <Link to="/login"> log in!</Link>
                 </div>
             </div>
         );
     }
 }
-
-const registerStyle = {
-    justifySelf: "center"
-};
-
-const inputStyle = {
-    float: "right"
-};

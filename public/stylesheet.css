@@ -1,0 +1,87 @@
+body {
+    margin: 0
+}
+
+#logo {
+    justify-self: center;
+    width: 20vw;
+    margin-top: -8vh;
+}
+
+#header {
+    justify-self: center;
+    font-family: 'Quattrocento', serif;
+    font-size: 8vw;
+    color: #004258;
+    /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+}
+
+.welcome {
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    justify-content: center
+}
+
+#registerButton {
+    font-family: 'Quattrocento', serif;
+}
+
+#registerButton button {
+    height: 4vh;
+    margin-left: 6vh;
+}
+
+#registerButton a {
+    text-decoration: none
+}
+
+#loginMember {
+    font-family: 'Quattrocento', serif;
+}
+
+#loginMember button {
+    height: 4vh;
+}
+
+#loginMember a {
+    text-decoration: none
+}
+
+#slogan {
+    margin-top: 8vh;
+    font-family: 'Quattrocento', serif;
+    justify-self: center
+}
+
+.input {
+    background-color: #004258;
+    padding: 3vh;
+}
+
+.register {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.register input {
+    /* border-radius: 2vh; */
+    height: 3vh;
+    width: 11vw;
+}
+
+.register button {
+    width: 8vw;
+    border-radius: 8px;
+}
+
+#login {
+    justify-content: center;
+}
+
+#login input {
+    margin-right: 3vw;
+}
+
+::placeholder {
+    text-align: center
+}
