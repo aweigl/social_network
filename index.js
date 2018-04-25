@@ -167,10 +167,9 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         let path = `${conf.s3Url}aaron/${req.file.filename}`;
         insertUpload(path, req.session.userId)
             .then(response => {
-                console.log("upload insertion complete");
                 res.json({
                     success: true,
-                    image: response.rows[0]
+                    userData: response.rows[0]
                 });
             })
             .catch(e => {

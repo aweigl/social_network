@@ -23,5 +23,8 @@ exports.getUserInfo = id => {
 };
 
 exports.insertUpload = (path, id) => {
-    return db.query("INSERT INTO users profilepic=$1 WHERE id=$2", [path, id]);
+    return db.query("UPDATE users SET profilepic=$1 WHERE id=$2 RETURNING *", [
+        path,
+        id
+    ]);
 };

@@ -5,7 +5,7 @@ import axios from "../axios";
 
 export function Profile(props) {
     console.log(props);
-    if (!props.userData.profilePic) {
+    if (!props.userData.profilepic) {
         return (
             <div>
                 <img
@@ -18,7 +18,7 @@ export function Profile(props) {
     }
     return (
         <div>
-            <img id="profilePic" src={props.userData.profilePic} />
+            <img id="profilePic" src={props.userData.profilepic} />
         </div>
     );
 }

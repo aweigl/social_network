@@ -25,13 +25,12 @@ export class App extends React.Component {
     uploadProfilePic() {
         var formData = new FormData();
         formData.append("file", this.state.file);
-        console.log(this.state.file);
-        console.log(formData);
         axios
             .post("/upload", formData)
-            .then(function(response) {
+            .then(response => {
                 if (response.data.success) {
-                    console.log("amazon has all my shit");
+                    this.setState({ userData: response.data.userData });
+                    this.setState({ open: false });
                 }
             })
             .catch(function(e) {
