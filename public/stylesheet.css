@@ -10,14 +10,14 @@ body {
 
 #appLogo {
     position: fixed;
-    width: 5vw;
+    width: 8vw;
     left: 1vh;
     top: 1vh
 }
 
 #profilePic {
     position: fixed;
-    width: 5vw;
+    width: 8vw;
     right: 1vw;
     top: 1vh;
 }
@@ -28,8 +28,11 @@ body {
 
 #uploadPic {
     position: fixed;
-    top: 1vh;
+    top: 11vh;
     left: 25vw;
+    background-color: grey;
+    height: 46vh;
+    width: 47vw;
 }
 
 #header {
