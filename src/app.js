@@ -17,8 +17,13 @@ export class App extends React.Component {
         this.setState({ open: true });
     }
 
-    ////////////////////////////////////////////
+    //////////////Upload and setFile///////////////
     setFile(event) {
+        let selectedImage = new FileReader();
+        selectedImage.readAsDataURL(event.target.files[0]);
+        selectedImage.addEventListener("load", () => {
+            this.setState({ selectedImage: selectedImage.result });
+        });
         this.setState({ file: event.target.files[0] });
         console.log(this.state);
     }
@@ -31,6 +36,7 @@ export class App extends React.Component {
                 if (response.data.success) {
                     this.setState({ userData: response.data.userData });
                     this.setState({ open: false });
+                    this.setState({ selectedImage: null });
                 }
             })
             .catch(function(e) {
@@ -60,6 +66,7 @@ export class App extends React.Component {
                     </a>
                     {this.state.open && (
                         <Upload
+                            {...this.state}
                             uploadProfilePic={this.uploadProfilePic}
                             setFile={this.setFile}
                         />

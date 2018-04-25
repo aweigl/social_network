@@ -27,12 +27,40 @@ body {
 }
 
 #uploadPic {
+    display: grid;
+    grid-template-rows: 84%;
+    justify-content: center;
     position: fixed;
     top: 11vh;
     left: 25vw;
-    background-color: grey;
+    border: 2px solid grey;
+    border-radius: 40px;
     height: 46vh;
     width: 47vw;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+#previewPic {
+    margin-top: 4vh;
+    border-radius: 10px;
+    justify-self: center;
+    max-width: 30vw;
+    top: 3vh;
+    max-height: 30vh
+}
+
+#inputlabel {
+    font-size: 1.25em;
+    font-weight: 700;
+    display: inline-block;
 }
 
 #header {
