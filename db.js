@@ -17,3 +17,7 @@ exports.registerUsers = (first, last, mail, pass) => {
 exports.checkLogin = mail => {
     return db.query("SELECT * FROM users WHERE mail=$1", [mail]);
 };
+
+exports.getUserInfo = id => {
+    return db.query("SELECT * FROM users WHERE id=$1", [id]);
+};

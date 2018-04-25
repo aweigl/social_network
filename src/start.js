@@ -3,12 +3,13 @@ import ReactDOM from "react-dom";
 import { Welcome } from "./welcome.js";
 import { Logo } from "./logo.js";
 import { Register } from "./register.js";
+import { App } from "./app.js";
 let component;
 
 if (location.pathname == "/welcome") {
     component = <Welcome />;
 } else {
-    component = <Logo />;
+    component = <App />;
 }
 
 ReactDOM.render(component, document.querySelector("main"));

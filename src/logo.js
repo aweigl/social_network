@@ -4,7 +4,7 @@ import { imgStyle } from "./welcome.js";
 export function Logo() {
     return (
         <div>
-            <img src="logo.png" style={imgStyle} />
+            <img id="appLogo" src="logo.png" />
         </div>
     );
 }

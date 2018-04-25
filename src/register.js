@@ -69,7 +69,7 @@ export class Register extends React.Component {
                     <button onClick={this.submit}>Register</button>
                     <div id="loginMember">
                         <Link to="/login">
-                            <button>Log in!</button>
+                            <button>Log in</button>
                         </Link>
                     </div>
                 </div>

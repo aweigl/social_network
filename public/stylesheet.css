@@ -8,7 +8,12 @@ body {
     margin-top: -8vh;
 }
 
+#appLogo {
+    width: 5vw
+}
+
 #header {
+    margin-top: 6vh;
     justify-self: center;
     font-family: 'Quattrocento', serif;
     font-size: 8vw;
@@ -29,6 +34,8 @@ body {
 #registerButton button {
     height: 4vh;
     margin-left: 6vh;
+    background-color: #00364A;
+    color: white;
 }
 
 #registerButton a {
@@ -41,6 +48,8 @@ body {
 
 #loginMember button {
     height: 4vh;
+    background-color: #00364A;
+    color: white;
 }
 
 #loginMember a {
@@ -50,7 +59,8 @@ body {
 #slogan {
     margin-top: 8vh;
     font-family: 'Quattrocento', serif;
-    justify-self: center
+    justify-self: center;
+    font-size: 25px;
 }
 
 .input {
@@ -72,6 +82,19 @@ body {
 .register button {
     width: 8vw;
     border-radius: 8px;
+}
+
+.loginError {
+    font-family: 'Quattrocento', serif;
+    position: fixed;
+    top: 11vh;
+    right: 40%;
+}
+
+.postError {
+    font-family: 'Quattrocento', serif;
+    position: fixed;
+    top: 11vh;
 }
 
 #login {

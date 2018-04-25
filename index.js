@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const bodyParser = require("body-parser");
-const { registerUsers, checkLogin } = require("./db.js");
+const { registerUsers, checkLogin, getUserInfo } = require("./db.js");
 const { hashPassword, checkPassword } = require("./bcrypt.js");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
@@ -46,13 +46,29 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
 
 ////LOGIN REQUIRED///////
-function requireLogin() {
+function requireLogin(req, res, next) {
     if (!req.session.userId) {
         res.sendStatus(403);
     } else {
         next();
     }
 }
+
+app.get("/user", requireLogin, (req, res) => {
+    getUserInfo(req.session.userId)
+        .then(response => {
+            res.json({
+                success: true,
+                userData: response.rows[0]
+            });
+        })
+        .catch(e => {
+            console.log(e);
+            res.json({
+                success: false
+            });
+        });
+});
 
 app.post("/register", (req, res) => {
     if (req.body.first && req.body.last && req.body.mail && req.body.password) {
