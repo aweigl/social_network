@@ -9,7 +9,27 @@ body {
 }
 
 #appLogo {
-    width: 5vw
+    position: fixed;
+    width: 5vw;
+    left: 1vh;
+    top: 1vh
+}
+
+#profilePic {
+    position: fixed;
+    width: 5vw;
+    right: 1vw;
+    top: 1vh;
+}
+
+#profilePic:hover {
+    cursor: crosshair;
+}
+
+#uploadPic {
+    position: fixed;
+    top: 1vh;
+    left: 25vw;
 }
 
 #header {

@@ -1,5 +1,5 @@
 import React from "react";
-import { imgStyle } from "./welcome.js";
+import { imgStyle } from "./welcome";
 
 export function Logo() {
     return (

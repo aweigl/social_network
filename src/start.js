@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Welcome } from "./welcome.js";
-import { Logo } from "./logo.js";
-import { Register } from "./register.js";
-import { App } from "./app.js";
+import { Welcome } from "./welcome";
+import { Logo } from "./logo";
+import { Register } from "./register";
+import { App } from "./app";
 let component;
 
 if (location.pathname == "/welcome") {

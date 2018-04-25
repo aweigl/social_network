@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "../axios";
-import { Register } from "./register.js";
-import { Logo } from "./logo.js";
-import { Login } from "./login.js";
+import { Register } from "./register";
+import { Logo } from "./logo";
+import { Login } from "./login";
 import { HashRouter, Route } from "react-router-dom";
 
 export function Welcome() {
