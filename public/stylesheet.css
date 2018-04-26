@@ -31,6 +31,17 @@ main onApp {
     cursor: crosshair;
 }
 
+#profile {
+    display: grid;
+    justify-content: center;
+    position: relative;
+    top: 19vh;
+}
+
+#profile img {
+    width: 25vw;
+}
+
 #uploadPic {
     display: grid;
     grid-template-rows: auto 84% auto;

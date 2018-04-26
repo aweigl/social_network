@@ -6,7 +6,8 @@ const {
     registerUsers,
     checkLogin,
     getUserInfo,
-    insertUpload
+    insertUpload,
+    bioInsert
 } = require("./db.js");
 const { hashPassword, checkPassword } = require("./bcrypt.js");
 const cookieSession = require("cookie-session");
@@ -188,6 +189,25 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     }
 });
 ////////////////////////////////////////////////////
+app.post("/bioSubmission", (req, res) => {
+    if (req.body) {
+        bioInsert(req.body.bio, req.session.userId)
+            .then(response => {
+                console.log(response.rows[0]);
+                res.json({
+                    success: true,
+                    userData: response.rows[0]
+                });
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    } else {
+        res.json({
+            success: false
+        });
+    }
+});
 
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {

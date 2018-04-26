@@ -6,5 +6,6 @@ CREATE TABLE users (
     last  VARCHAR(255) NOT NULL,
     mail VARCHAR(512) NOT NULL UNIQUE,
     pass VARCHAR(255) NOT NULL,
-    profilepic VARCHAR(512)
+    profilepic VARCHAR(512),
+    bio VARCHAR(512)
 );
