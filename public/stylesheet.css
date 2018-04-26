@@ -1,10 +1,15 @@
+* {
+    font-family: 'Quattrocento', serif;
+}
+
 body {
     margin: 0
 }
 
-main onApp {
-    height: 10vw;
-    border-bottom: 2px solid black;
+header {
+    height: 100%;
+    border-bottom: 1px solid;
+    padding-bottom: 1vh;
 }
 
 #topNavigation {
@@ -19,20 +24,60 @@ main onApp {
 
 #appLogo {
     position: fixed;
-    width: 8vw;
+    width: 6vw;
     left: 1vh;
     top: 1vh
 }
 
+.image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.bio-cropper {
+    border-radius: 50%;
+    max-height: 40vh;
+    max-width: 20vw;
+    overflow: hidden;
+    display: grid;
+    justify-content: center;
+}
+
+#profileText {
+    display: grid;
+}
+
+#profileText h1, div {
+    justify-self: center;
+}
+
+#bioText {
+    border: 1px solid;
+    padding: 1vw;
+    border-radius: 1vw;
+}
+
+#bioInput {
+    display: grid
+}
+
+#bioInput input {
+    min-height: 10vh
+}
+
 #profilePic {
     position: fixed;
-    width: 8vw;
+    max-width: 6vw;
+    max-height: 12vh;
     right: 1vw;
     top: 1vh;
 }
 
 #profilePic:hover {
-    cursor: crosshair;
+    cursor: pointer;
 }
 
 #profile {
@@ -44,7 +89,7 @@ main onApp {
 }
 
 #profile img {
-    max-height: 55vh
+    max-height: 40vh;
 }
 
 #uploadPic {
@@ -59,7 +104,14 @@ main onApp {
     padding: 3vw;
     z-index: 2;
     background-color: white;
-    opacity: 0.8
+}
+
+#uploadPic a {
+    justify-self: end;
+}
+
+#uploadPic a:hover {
+    cursor: pointer
 }
 
 .inputfile {
@@ -71,12 +123,9 @@ main onApp {
     z-index: -1;
 }
 
-#previewPic {
-    margin-top: 4vh;
+.previewPic {
     border-radius: 10px;
     justify-self: center;
-    max-width: 30vw;
-    top: 3vh;
     max-height: 30vh
 }
 

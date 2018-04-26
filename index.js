@@ -164,7 +164,7 @@ app.post("/login", (req, res) => {
 
 /////////////////////MULTER//////////////////////////
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    if (req.file) {
+    if (req.file.path) {
         let path = `${conf.s3Url}aaron/${req.file.filename}`;
         insertUpload(path, req.session.userId)
             .then(response => {
@@ -190,6 +190,9 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
 });
 ////////////////////////////////////////////////////
 app.post("/bioSubmission", (req, res) => {
+    if (req.body.bio == "") {
+        re.body.bio = null;
+    }
     if (req.body) {
         bioInsert(req.body.bio, req.session.userId)
             .then(response => {

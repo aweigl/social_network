@@ -17,9 +17,12 @@ export class App extends React.Component {
     }
     showPictureUpload() {
         this.setState({ open: true });
+        this.setState({ error: false });
     }
     closePictureUpload() {
         this.setState({ open: "" });
+        this.setState({ error: false });
+        this.setState({ selectedImage: null });
     }
 
     //////////////Upload and setFile///////////////
@@ -30,25 +33,29 @@ export class App extends React.Component {
             this.setState({ selectedImage: selectedImage.result });
         });
         this.setState({ file: event.target.files[0] });
-        console.log(this.state);
+        this.setState({ error: false });
     }
     uploadProfilePic() {
-        var formData = new FormData();
-        formData.append("file", this.state.file);
-        axios
-            .post("/upload", formData)
-            .then(response => {
-                if (response.data.success) {
-                    this.setState({ userData: response.data.userData });
-                    this.setState({ open: false });
-                    this.setState({ selectedImage: null });
-                } else {
-                    this.setState({ error: true });
-                }
-            })
-            .catch(function(e) {
-                console.log(e);
+        if (this.state.file.size > 2097152) {
+            this.setState({
+                error: true
             });
+        } else {
+            var formData = new FormData();
+            formData.append("file", this.state.file);
+            axios
+                .post("/upload", formData)
+                .then(response => {
+                    if (response.data.success) {
+                        this.setState({ userData: response.data.userData });
+                        this.setState({ open: false });
+                        this.setState({ selectedImage: null });
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        }
     }
     //////////////////////////////
     componentDidMount() {
@@ -82,7 +89,6 @@ export class App extends React.Component {
                             uploadProfilePic={this.uploadProfilePic}
                             closePictureUpload={this.closePictureUpload}
                             setFile={this.setFile}
-                            error={this.error}
                         />
                     )}
                 </header>

@@ -1,9 +1,8 @@
 import React from "react";
 
 export function Bio(props) {
-    console.log("BioProps", props);
     return (
-        <div>
+        <div id="bioText">
             {!props.changeBio &&
                 !props.userData.bio && (
                     <a href="#" onClick={props.bioChange}>
@@ -12,7 +11,7 @@ export function Bio(props) {
                 )}
             {props.changeBio &&
                 !props.successfullBioEdit && (
-                    <div>
+                    <div id="bioInput">
                         <textarea
                             type="text"
                             name="bio"

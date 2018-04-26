@@ -1,7 +1,5 @@
 import React from "react";
-import { HashRouter, Route, Link } from "react-router-dom";
 import { Logo } from "./logo";
-import axios from "../axios";
 
 export function Upload(props) {
     console.log("PROPS", props);
@@ -9,7 +7,15 @@ export function Upload(props) {
         <div id="uploadPic">
             <a onClick={props.closePictureUpload}>X</a>
             <h2>Hello, {props.userData.first}!</h2>
-            <img id="previewPic" src={props.selectedImage} />
+
+            <img className="previewPic" src={props.selectedImage} />
+            {props.userData.profilepic &&
+                !props.selectedImage && (
+                    <img
+                        className="previewPic"
+                        src={props.userData.profilepic}
+                    />
+                )}
             <div id="pictureChoose">
                 <label htmlFor="file" id="inputlabel">
                     Choose a picture...
@@ -21,8 +27,12 @@ export function Upload(props) {
                         onChange={props.setFile}
                     />
                 </label>
-                <button onClick={props.uploadProfilePic}>Submit</button>
-                {props.error && <p>SomeError</p>}
+                {props.selectedImage && (
+                    <button onClick={props.uploadProfilePic}>Submit</button>
+                )}
+                {props.error && (
+                    <p>The file you are trying to upload is too large!</p>
+                )}
             </div>
         </div>
     );

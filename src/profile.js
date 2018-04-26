@@ -23,10 +23,16 @@ export class Profile extends React.Component {
     }
     async submitBio() {
         let response = await axios.post("/bioSubmission", this.state);
+        if (!response.data.userData.bio) {
+            this.setState({
+                changeBio: false
+            });
+        }
         this.setState({
             userData: response.data.userData,
             successfullBioEdit: true
         });
+        console.log(this.state);
     }
     editBio() {
         this.setState({
@@ -39,15 +45,17 @@ export class Profile extends React.Component {
         return (
             <div id="profile">
                 {this.props.userData && (
-                    <div>
-                        {this.props.userData.profilepic && (
-                            <img src={this.props.userData.profilepic} />
-                        )}
-                        {!this.props.userData.profilepic && (
-                            <img src="/default.png" />
-                        )}
+                    <div id="profileText">
+                        <div className="bio-cropper">
+                            {this.props.userData.profilepic && (
+                                <img src={this.props.userData.profilepic} />
+                            )}
+                            {!this.props.userData.profilepic && (
+                                <img src="/default.png" />
+                            )}
+                        </div>
                         <h1>
-                            {this.props.userData.first}
+                            {this.props.userData.first}{" "}
                             {this.props.userData.last}
                         </h1>
                         <Bio
