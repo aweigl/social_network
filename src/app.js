@@ -11,6 +11,7 @@ export class App extends React.Component {
         super(props);
         this.state = {};
         this.showPictureUpload = this.showPictureUpload.bind(this);
+        this.closePictureUpload = this.closePictureUpload.bind(this);
         this.uploadProfilePic = this.uploadProfilePic.bind(this);
         this.setFile = this.setFile.bind(this);
     }
@@ -18,7 +19,7 @@ export class App extends React.Component {
         this.setState({ open: true });
     }
     closePictureUpload() {
-        this.setState({ open: false });
+        this.setState({ open: "" });
     }
 
     //////////////Upload and setFile///////////////
@@ -51,6 +52,11 @@ export class App extends React.Component {
     }
     //////////////////////////////
     componentDidMount() {
+        window.addEventListener("keyup", e => {
+            if (e.keyCode == "27") {
+                this.closePictureUpload();
+            }
+        });
         axios
             .get("/user")
             .then(response => {
@@ -64,7 +70,7 @@ export class App extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div id="topNavigation">
                 <header>
                     <Logo />
                     <a onClick={this.showPictureUpload}>
@@ -74,6 +80,7 @@ export class App extends React.Component {
                         <Upload
                             {...this.state}
                             uploadProfilePic={this.uploadProfilePic}
+                            closePictureUpload={this.closePictureUpload}
                             setFile={this.setFile}
                             error={this.error}
                         />

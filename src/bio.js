@@ -1,6 +1,7 @@
 import React from "react";
 
 export function Bio(props) {
+    console.log("BioProps", props);
     return (
         <div>
             {!props.changeBio &&
@@ -16,6 +17,7 @@ export function Bio(props) {
                             type="text"
                             name="bio"
                             onChange={props.inputChange}
+                            defaultValue={props.userData.bio}
                         />
                         <button onClick={props.submitBio}>Save</button>
                     </div>

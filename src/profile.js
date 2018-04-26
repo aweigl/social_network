@@ -21,12 +21,11 @@ export class Profile extends React.Component {
             bio: e.target.value
         });
     }
-    submitBio() {
-        axios.post("/bioSubmission", this.state).then(response => {
-            this.setState({
-                userData: response.data.userData,
-                successfullBioEdit: true
-            });
+    async submitBio() {
+        let response = await axios.post("/bioSubmission", this.state);
+        this.setState({
+            userData: response.data.userData,
+            successfullBioEdit: true
         });
     }
     editBio() {

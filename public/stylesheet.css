@@ -7,6 +7,10 @@ main onApp {
     border-bottom: 2px solid black;
 }
 
+#topNavigation {
+    height: 13vh;
+}
+
 #logo {
     justify-self: center;
     width: 20vw;
@@ -35,11 +39,12 @@ main onApp {
     display: grid;
     justify-content: center;
     position: relative;
-    top: 19vh;
+    top: 3vh;
+    z-index: -1
 }
 
 #profile img {
-    width: 25vw;
+    max-height: 55vh
 }
 
 #uploadPic {
@@ -48,10 +53,13 @@ main onApp {
     justify-content: center;
     position: fixed;
     top: 11vh;
-    left: 25vw;
+    left: 35vw;
     border: 2px solid grey;
     border-radius: 40px;
     padding: 3vw;
+    z-index: 2;
+    background-color: white;
+    opacity: 0.8
 }
 
 .inputfile {

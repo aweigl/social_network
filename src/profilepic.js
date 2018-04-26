@@ -4,7 +4,6 @@ import { Logo } from "./logo";
 import axios from "../axios";
 
 export function Profilepic(props) {
-    console.log(props);
     if (!props.userData.profilepic) {
         return (
             <div>

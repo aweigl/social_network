@@ -7,6 +7,7 @@ export function Upload(props) {
     console.log("PROPS", props);
     return (
         <div id="uploadPic">
+            <a onClick={props.closePictureUpload}>X</a>
             <h2>Hello, {props.userData.first}!</h2>
             <img id="previewPic" src={props.selectedImage} />
             <div id="pictureChoose">
