@@ -2,6 +2,11 @@ body {
     margin: 0
 }
 
+main onApp {
+    height: 10vw;
+    border-bottom: 2px solid black;
+}
+
 #logo {
     justify-self: center;
     width: 20vw;
@@ -28,15 +33,14 @@ body {
 
 #uploadPic {
     display: grid;
-    grid-template-rows: 84%;
+    grid-template-rows: auto 84% auto;
     justify-content: center;
     position: fixed;
     top: 11vh;
     left: 25vw;
     border: 2px solid grey;
     border-radius: 40px;
-    height: 46vh;
-    width: 47vw;
+    padding: 3vw;
 }
 
 .inputfile {

@@ -167,10 +167,16 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         let path = `${conf.s3Url}aaron/${req.file.filename}`;
         insertUpload(path, req.session.userId)
             .then(response => {
-                res.json({
-                    success: true,
-                    userData: response.rows[0]
-                });
+                if (response.rows) {
+                    res.json({
+                        success: true,
+                        userData: response.rows[0]
+                    });
+                } else {
+                    res.json({
+                        success: false
+                    });
+                }
             })
             .catch(e => {
                 console.log(e);
@@ -179,7 +185,6 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         res.json({
             success: false
         });
-        console.log(`upload failure`);
     }
 });
 ////////////////////////////////////////////////////
@@ -192,7 +197,7 @@ app.get("/welcome", (req, res) => {
     }
 });
 
-app.get("*", function(req, res) {
+app.get("*", requireLogin, (req, res) => {
     if (!req.session.userId) {
         res.redirect("/welcome");
     } else {
@@ -200,6 +205,6 @@ app.get("*", function(req, res) {
     }
 });
 
-app.listen(8080, function() {
+app.listen(8080, () => {
     console.log("I'm listening.");
 });

@@ -1,7 +1,8 @@
 import React from "react";
-import { HashRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 import { Logo } from "./logo";
 import axios from "../axios";
+import { Profilepic } from "./profilepic";
 import { Profile } from "./profile";
 import { Upload } from "./upload";
 
@@ -15,6 +16,9 @@ export class App extends React.Component {
     }
     showPictureUpload() {
         this.setState({ open: true });
+    }
+    closePictureUpload() {
+        this.setState({ open: false });
     }
 
     //////////////Upload and setFile///////////////
@@ -37,6 +41,8 @@ export class App extends React.Component {
                     this.setState({ userData: response.data.userData });
                     this.setState({ open: false });
                     this.setState({ selectedImage: null });
+                } else {
+                    this.setState({ error: true });
                 }
             })
             .catch(function(e) {
@@ -62,16 +68,23 @@ export class App extends React.Component {
                 <header>
                     <Logo />
                     <a onClick={this.showPictureUpload}>
-                        {this.state.userData && <Profile {...this.state} />}
+                        {this.state.userData && <Profilepic {...this.state} />}
                     </a>
                     {this.state.open && (
                         <Upload
                             {...this.state}
                             uploadProfilePic={this.uploadProfilePic}
                             setFile={this.setFile}
+                            error={this.error}
                         />
                     )}
                 </header>
+                <BrowserRouter>
+                    <Route
+                        path="/"
+                        render={() => <Profile {...this.state} />}
+                    />
+                </BrowserRouter>
             </div>
         );
     }

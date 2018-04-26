@@ -1,24 +1,23 @@
 import React from "react";
-import { HashRouter, Route, Link } from "react-router-dom";
-import { Logo } from "./logo";
-import axios from "../axios";
 
-export function Profile(props) {
-    console.log(props);
-    if (!props.userData.profilepic) {
+export class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+    render() {
         return (
             <div>
-                <img
-                    id="profilePic"
-                    src="default.png"
-                    alt={props.userData.first + " " + props.userData.last}
-                />
+                {this.props.userData && (
+                    <div>
+                        <img src={this.props.userData.profilepic} />
+                        <h1>
+                            {this.props.userData.first}
+                            {this.props.userData.last}
+                        </h1>
+                    </div>
+                )}
             </div>
         );
     }
-    return (
-        <div>
-            <img id="profilePic" src={props.userData.profilepic} />
-        </div>
-    );
 }
