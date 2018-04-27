@@ -12,6 +12,12 @@ header {
     padding-bottom: 1vh;
 }
 
+#logout {
+    position: relative;
+    left: 44vw;
+    top: 11vh;
+}
+
 #appNavigation {
     height: 13vh;
 }
@@ -85,7 +91,6 @@ header {
     justify-content: center;
     position: relative;
     top: 3vh;
-    z-index: -1
 }
 
 #profile img {

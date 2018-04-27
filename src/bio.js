@@ -6,9 +6,9 @@ export function Bio(props) {
         <div id="bioText">
             {!props.changeBio &&
                 !props.userData.bio && (
-                    <button onClick={props.bioChange}>
+                    <a href="#" onClick={props.bioChange}>
                         No bio yet? Click here to change that!
-                    </button>
+                    </a>
                 )}
             {props.changeBio &&
                 !props.successfullBioEdit && (

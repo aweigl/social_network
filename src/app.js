@@ -78,6 +78,9 @@ export class App extends React.Component {
         return (
             <div id="appNavigation">
                 <header>
+                    <a id="logout" href="/logout">
+                        Logout
+                    </a>
                     <Logo />
                     <a onClick={this.showPictureUpload}>
                         {this.state.userData && <Profilepic {...this.state} />}
@@ -94,6 +97,9 @@ export class App extends React.Component {
 
                 <BrowserRouter>
                     <div className="BrowserRouter">
+                        <Link to="/">
+                            <div>Profile</div>
+                        </Link>
                         <Link to="/user/2">
                             <div>User2</div>
                         </Link>

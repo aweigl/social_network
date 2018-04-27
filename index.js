@@ -228,6 +228,11 @@ app.post("/bioSubmission", (req, res) => {
     }
 });
 
+app.get("/logout", (req, res) => {
+    req.session.userId = null;
+    res.redirect("/welcome");
+});
+
 app.get("/welcome", (req, res) => {
     if (req.session.userId) {
         res.redirect("/");
