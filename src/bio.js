@@ -1,13 +1,14 @@
 import React from "react";
 
 export function Bio(props) {
+    console.log("BioProps", props);
     return (
         <div id="bioText">
             {!props.changeBio &&
                 !props.userData.bio && (
-                    <a href="#" onClick={props.bioChange}>
+                    <button onClick={props.bioChange}>
                         No bio yet? Click here to change that!
-                    </a>
+                    </button>
                 )}
             {props.changeBio &&
                 !props.successfullBioEdit && (
@@ -24,9 +25,7 @@ export function Bio(props) {
             {props.userData.bio && (
                 <div>
                     <p>{props.userData.bio}</p>
-                    <a href="#" onClick={props.editBio}>
-                        Edit
-                    </a>
+                    <button onClick={props.editBio}>Edit</button>
                 </div>
             )}
         </div>

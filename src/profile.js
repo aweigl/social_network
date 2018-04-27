@@ -25,14 +25,15 @@ export class Profile extends React.Component {
         let response = await axios.post("/bioSubmission", this.state);
         if (!response.data.userData.bio) {
             this.setState({
-                changeBio: false
+                changeBio: false,
+                successfullBioEdit: false
+            });
+        } else {
+            this.setState({
+                userData: response.data.userData,
+                successfullBioEdit: true
             });
         }
-        this.setState({
-            userData: response.data.userData,
-            successfullBioEdit: true
-        });
-        console.log(this.state);
     }
     editBio() {
         this.setState({

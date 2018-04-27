@@ -84,9 +84,10 @@ function requireLogin(req, res, next) {
 }
 //////////////////////////
 
-app.get("/user", requireLogin, (req, res) => {
+app.get("/userInfo", requireLogin, (req, res) => {
     getUserInfo(req.session.userId)
         .then(response => {
+            response.rows[0].pass = null;
             res.json({
                 success: true,
                 userData: response.rows[0]
@@ -97,6 +98,21 @@ app.get("/user", requireLogin, (req, res) => {
             res.json({
                 success: false
             });
+        });
+});
+
+app.get("/userInfo/:userId", requireLogin, (req, res) => {
+    getUserInfo(req.params.userId)
+        .then(response => {
+            response.rows[0].pass = null;
+            res.json({
+                success: true,
+                userInfo: response.rows[0],
+                sameUser: req.session.userId == req.params.userId
+            });
+        })
+        .catch(e => {
+            console.log(e);
         });
 });
 

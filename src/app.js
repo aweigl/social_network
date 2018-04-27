@@ -5,6 +5,7 @@ import axios from "../axios";
 import { Profilepic } from "./profilepic";
 import { Profile } from "./profile";
 import { Upload } from "./upload";
+import { OtherProfile } from "./otherprofile";
 
 export class App extends React.Component {
     constructor(props) {
@@ -58,26 +59,24 @@ export class App extends React.Component {
         }
     }
     //////////////////////////////
-    componentDidMount() {
+    async componentDidMount() {
         window.addEventListener("keyup", e => {
             if (e.keyCode == "27") {
                 this.closePictureUpload();
             }
         });
-        axios
-            .get("/user")
-            .then(response => {
-                if (response.data.success) {
-                    this.setState({ userData: response.data.userData });
-                }
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        try {
+            const response = await axios.get("/userInfo");
+            if (response.data.success) {
+                this.setState({ userData: response.data.userData });
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
     render() {
         return (
-            <div id="topNavigation">
+            <div id="appNavigation">
                 <header>
                     <Logo />
                     <a onClick={this.showPictureUpload}>
@@ -92,11 +91,26 @@ export class App extends React.Component {
                         />
                     )}
                 </header>
+
                 <BrowserRouter>
-                    <Route
-                        path="/"
-                        render={() => <Profile {...this.state} />}
-                    />
+                    <div className="BrowserRouter">
+                        <Link to="/user/2">
+                            <div>User2</div>
+                        </Link>
+                        <Link to="/user/3">
+                            <div>User3</div>
+                        </Link>
+                        <Route
+                            exact
+                            path="/user/:userId"
+                            component={OtherProfile}
+                        />
+                        <Route
+                            exact
+                            path="/"
+                            render={() => <Profile {...this.state} />}
+                        />
+                    </div>
                 </BrowserRouter>
             </div>
         );
