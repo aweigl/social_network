@@ -12,21 +12,7 @@ export class Profile extends React.Component {
         this.inputChange = this.inputChange.bind(this);
         this.editBio = this.editBio.bind(this);
     }
-    async componentDidMount() {
-        console.log(this.props.userData);
-        try {
-            const response = await axios.get(
-                `/friendshipStatus/${this.props.userData.id}`
-            );
-            response.data.success
-                ? this.setState({
-                      friendshipStatus: response.data.friendshipStatus
-                  })
-                : console.log("unsuccessfull axios request");
-        } catch (e) {
-            console.log(e);
-        }
-    }
+
     bioChange() {
         this.setState({
             changeBio: true

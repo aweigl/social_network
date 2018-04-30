@@ -9,7 +9,9 @@ const {
     insertUpload,
     bioInsert,
     checkFriendshipStatus,
-    makeFriendRequest
+    makeFriendRequest,
+    acceptFriendRequest,
+    endFriendship
 } = require("./db.js");
 const { hashPassword, checkPassword } = require("./bcrypt.js");
 const cookieSession = require("cookie-session");
@@ -236,14 +238,15 @@ app.get("/friendshipStatus/:profileId", (req, res) => {
     checkFriendshipStatus(req.session.userId, req.params.profileId)
         .then(response => {
             console.log(response);
-            if (response.rowCount > 0) {
+            if (response.rowCount != 0) {
                 res.json({
                     success: true,
-                    friendshipStatus: response.rows[0].status
+                    userData: response.rows[0],
+                    currentUser: req.session.userId
                 });
             } else {
                 res.json({
-                    success: true,
+                    success: false,
                     friendshipStatus: 0
                 });
             }
@@ -259,6 +262,31 @@ app.post("/makeFriendRequest/:profileId", (req, res) => {
             res.json({
                 success: true,
                 friendshipStatus: 1
+            });
+        })
+        .catch(e => {
+            console.log(e);
+        });
+});
+
+app.post("/acceptFriendRequest/:profileId", (req, res) => {
+    acceptFriendRequest(req.params.profileId, req.session.userId)
+        .then(response => {
+            res.json({
+                success: true,
+                friendshipStatus: 2
+            });
+        })
+        .catch(e => {
+            console.log(e);
+        });
+});
+
+app.post("/endFriendship/:profileId", (req, res) => {
+    endFriendship(req.params.profileId, req.session.userId)
+        .then(response => {
+            res.json({
+                success: true
             });
         })
         .catch(e => {

@@ -38,7 +38,7 @@ exports.bioInsert = (bio, id) => {
 
 exports.checkFriendshipStatus = (requester, receiver) => {
     return db.query(
-        "SELECT status FROM friendships WHERE requester_id=$1 AND receiver_id=$2 OR requester_id=$2 AND receiver_id=$1",
+        "SELECT * FROM friendships WHERE requester_id=$1 AND receiver_id=$2 OR requester_id=$2 AND receiver_id=$1",
         [requester, receiver]
     );
 };
@@ -46,6 +46,20 @@ exports.checkFriendshipStatus = (requester, receiver) => {
 exports.makeFriendRequest = (requester, receiver) => {
     return db.query(
         "INSERT INTO friendships (requester_id, receiver_id, status) VALUES ($1, $2, 1)",
+        [requester, receiver]
+    );
+};
+
+exports.acceptFriendRequest = (requester, receiver) => {
+    return db.query(
+        "UPDATE friendships SET status=2 WHERE requester_id=$1 AND receiver_id=$2",
+        [requester, receiver]
+    );
+};
+
+exports.endFriendship = (requester, receiver) => {
+    return db.query(
+        "DELETE FROM friendships WHERE requester_id=$1 AND receiver_id=$2 OR requester_id=$2 AND receiver_id=$1",
         [requester, receiver]
     );
 };

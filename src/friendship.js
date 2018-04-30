@@ -6,6 +6,33 @@ export class Friendship extends React.Component {
         super(props);
         this.state = {};
         this.makeFriendRequest = this.makeFriendRequest.bind(this);
+        this.acceptFriendRequest = this.acceptFriendRequest.bind(this);
+        this.endFriendship = this.endFriendship.bind(this);
+    }
+    async componentDidMount() {
+        try {
+            const response = await axios.get(
+                `/friendshipStatus/${this.props.userData.id}`
+            );
+            console.log(response.data.success);
+            if (response.data.success) {
+                response.data.userData.receiver_id == response.data.currentUser
+                    ? this.setState({
+                          friendshipStatus: response.data.userData.status,
+                          requestRecipient: true
+                      })
+                    : this.setState({
+                          friendshipStatus: response.data.userData.status,
+                          requestRecipient: false
+                      });
+            } else {
+                this.setState({
+                    friendshipStatus: 0
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
     }
     async componentWillReceiveProps(nextProps) {
         if (nextProps.userData.id != this.props.userData.id) {
@@ -13,30 +40,26 @@ export class Friendship extends React.Component {
                 const response = await axios.get(
                     `/friendshipStatus/${this.props.userData.id}`
                 );
-                console.log(response.data);
-                response.data.success
-                    ? this.setState({
-                          friendshipStatus: response.data.friendshipStatus
-                      })
-                    : console.log("unsuccessfull axios request");
+                console.log(response.data.userData);
+                if (response.data.success) {
+                    response.data.userData.receiver_id ==
+                    response.data.currentUser
+                        ? this.setState({
+                              friendshipStatus: response.data.userData.status,
+                              requestRecipient: true
+                          })
+                        : this.setState({
+                              friendshipStatus: response.data.userData.status,
+                              requestRecipient: false
+                          });
+                } else {
+                    this.setState({
+                        friendshipStatus: 0
+                    });
+                }
             } catch (e) {
                 console.log(e);
             }
-        }
-    }
-    async componentDidMount() {
-        console.log(this.props);
-        try {
-            const response = await axios.get(
-                `/friendshipStatus/${this.props.userData.id}`
-            );
-            response.data.success
-                ? this.setState({
-                      friendshipStatus: response.data.friendshipStatus
-                  })
-                : console.log("unsuccessfull axios request");
-        } catch (e) {
-            console.log(e);
         }
     }
     async makeFriendRequest() {
@@ -44,26 +67,77 @@ export class Friendship extends React.Component {
             const response = await axios.post(
                 `/makeFriendRequest/${this.props.userData.id}`
             );
-            console.log("friend request made");
-            this.setState({
-                friendshipStatus: 1
-            });
+            if (response.data.success) {
+                this.setState({
+                    friendshipStatus: 1
+                });
+            } else {
+                this.setState({
+                    friendshipStatus: 0
+                });
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    async acceptFriendRequest() {
+        try {
+            const response = await axios.post(
+                `/acceptFriendRequest/${this.props.userData.id}`
+            );
+            response.data.success
+                ? this.setState({
+                      friendshipStatus: 2
+                  })
+                : console.log(response);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async endFriendship() {
+        try {
+            const response = await axios.post(
+                `/endFriendship/${this.props.userData.id}`
+            );
+            response.data.success
+                ? this.setState({
+                      friendshipStatus: 0
+                  })
+                : console.log(response);
         } catch (e) {
             console.log(e);
         }
     }
     render() {
+        console.log(this.props);
         return (
             <div className="friendshipButtons">
-                {this.state.friendshipStatus == 0 ? (
-                    <button onClick={this.makeFriendRequest}>
-                        Make friend request
-                    </button>
-                ) : (
-                    <button>Cancel friend request</button>
-                )}
+                <div>
+                    {this.state.friendshipStatus == 0 && (
+                        <button onClick={this.makeFriendRequest}>
+                            Make friend request
+                        </button>
+                    )}
+                </div>
+                <div>
+                    {this.state.friendshipStatus == 1 &&
+                        !this.state.requestRecipient && (
+                            <button onClick={this.endFriendship}>
+                                Cancel friend request
+                            </button>
+                        )}
+                </div>
+                <div>
+                    {this.state.requestRecipient &&
+                        this.state.friendshipStatus == 1 && (
+                            <button onClick={this.acceptFriendRequest}>
+                                Accept friend request
+                            </button>
+                        )}
+                </div>
                 {this.state.friendshipStatus == 2 && (
-                    <button>End friendship</button>
+                    <button onClick={this.endFriendship}>End friendship</button>
                 )}
             </div>
         );
