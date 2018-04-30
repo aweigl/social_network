@@ -152,7 +152,6 @@ header {
     font-family: 'Quattrocento', serif;
     font-size: 8vw;
     color: #004258;
-    /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
 }
 
 .welcome {
@@ -241,4 +240,26 @@ header {
 
 ::placeholder {
     text-align: center
+}
+
+.friendshipButtons button {
+    margin: 2vw;
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 6px;
+    text-decoration: none;
+    background-color: #003E53;
+    color: white;
+}
+
+#backToProfile {
+    margin: 2vw;
+    border-radius: 5px;
+    padding: 6px;
+    text-decoration: none;
+    background-color: #003E53;
+    color: white;
+    position: relative;
+    top: 77vh;
+    left: 91.6vw;
 }

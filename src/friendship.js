@@ -14,7 +14,6 @@ export class Friendship extends React.Component {
             const response = await axios.get(
                 `/friendshipStatus/${this.props.userData.id}`
             );
-            console.log(response.data.success);
             if (response.data.success) {
                 response.data.userData.receiver_id == response.data.currentUser
                     ? this.setState({
@@ -129,8 +128,8 @@ export class Friendship extends React.Component {
                         )}
                 </div>
                 <div>
-                    {this.state.requestRecipient &&
-                        this.state.friendshipStatus == 1 && (
+                    {this.state.friendshipStatus == 1 &&
+                        this.state.requestRecipient && (
                             <button onClick={this.acceptFriendRequest}>
                                 Accept friend request
                             </button>
