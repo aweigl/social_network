@@ -97,15 +97,17 @@ export class App extends React.Component {
 
                 <BrowserRouter>
                     <div className="BrowserRouter">
-                        <Link to="/">
-                            <div>Profile</div>
-                        </Link>
-                        <Link to="/user/2">
-                            <div>User2</div>
-                        </Link>
-                        <Link to="/user/3">
-                            <div>User3</div>
-                        </Link>
+                        <div id="ProfileLinksContainer">
+                            <Link id="backToProfile" to="/">
+                                <div>My Profile</div>
+                            </Link>
+                            <Link id="profileLinks" to="/user/2">
+                                <div>User2</div>
+                            </Link>
+                            <Link to="/user/3">
+                                <div>User3</div>
+                            </Link>
+                        </div>
                         <Route
                             exact
                             path="/user/:userId"

@@ -35,3 +35,17 @@ exports.bioInsert = (bio, id) => {
         id
     ]);
 };
+
+exports.checkFriendshipStatus = (requester, receiver) => {
+    return db.query(
+        "SELECT status FROM friendships WHERE requester_id=$1 AND receiver_id=$2 OR requester_id=$2 AND receiver_id=$1",
+        [requester, receiver]
+    );
+};
+
+exports.makeFriendRequest = (requester, receiver) => {
+    return db.query(
+        "INSERT INTO friendships (requester_id, receiver_id, status) VALUES ($1, $2, 1)",
+        [requester, receiver]
+    );
+};

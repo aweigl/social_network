@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "../axios";
+import { Friendship } from "./friendship";
 
 export class OtherProfile extends React.Component {
     constructor(props) {
@@ -59,6 +60,7 @@ export class OtherProfile extends React.Component {
                             {this.state.userData.first}{" "}
                             {this.state.userData.last}
                         </h1>
+                        <Friendship {...this.state} />
                     </div>
                 )}
             </div>

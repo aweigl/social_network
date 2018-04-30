@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "../axios";
 import { Bio } from "./bio";
+import { Friendship } from "./friendship";
 
 export class Profile extends React.Component {
     constructor(props) {
@@ -10,6 +11,21 @@ export class Profile extends React.Component {
         this.submitBio = this.submitBio.bind(this);
         this.inputChange = this.inputChange.bind(this);
         this.editBio = this.editBio.bind(this);
+    }
+    async componentDidMount() {
+        console.log(this.props.userData);
+        try {
+            const response = await axios.get(
+                `/friendshipStatus/${this.props.userData.id}`
+            );
+            response.data.success
+                ? this.setState({
+                      friendshipStatus: response.data.friendshipStatus
+                  })
+                : console.log("unsuccessfull axios request");
+        } catch (e) {
+            console.log(e);
+        }
     }
     bioChange() {
         this.setState({
