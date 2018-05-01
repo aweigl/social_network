@@ -68,11 +68,13 @@ export class Friendship extends React.Component {
             );
             if (response.data.success) {
                 this.setState({
-                    friendshipStatus: 1
+                    friendshipStatus: 1,
+                    requestRecipient: false
                 });
             } else {
                 this.setState({
-                    friendshipStatus: 0
+                    friendshipStatus: 0,
+                    requestRecipient: false
                 });
             }
         } catch (e) {
