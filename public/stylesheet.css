@@ -50,8 +50,8 @@ header {
 
 .bio-cropper {
     border-radius: 50%;
-    max-height: 40vh;
-    max-width: 20vw;
+    height: 40vh;
+    width: 40vh;
     overflow: hidden;
     display: grid;
     justify-content: center;
@@ -99,7 +99,7 @@ header {
 }
 
 #profile img {
-    max-height: 40vh;
+    height: 100%
 }
 
 #uploadPic {
@@ -112,7 +112,7 @@ header {
     border: 2px solid grey;
     border-radius: 40px;
     padding: 3vw;
-    /* z-index: 2; */
+    z-index: 2;
     background-color: white;
 }
 
@@ -122,6 +122,11 @@ header {
 
 #uploadPic a:hover {
     cursor: pointer
+}
+
+#uploadPic h2 {
+    display: grid;
+    justify-content: center;
 }
 
 .inputfile {
@@ -139,10 +144,22 @@ header {
     max-height: 30vh
 }
 
+#pictureChoose button {
+    background-color: #003E53;
+    color: white;
+    cursor: pointer;
+}
+
 #inputlabel {
     font-size: 1.25em;
-    font-weight: 700;
     display: inline-block;
+    margin-top: 7vh;
+    padding: 0.7vh;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #003E53;
+    color: white;
 }
 
 #header {

@@ -75,44 +75,50 @@ export class App extends React.Component {
         }
     }
     render() {
-        return (
-            <div id="appNavigation">
-                <header>
-                    <a id="logout" href="/logout">
-                        Logout
-                    </a>
-                    <Logo />
-                    <a onClick={this.showPictureUpload}>
-                        {this.state.userData && <Profilepic {...this.state} />}
-                    </a>
-                    {this.state.open && (
-                        <Upload
-                            {...this.state}
-                            uploadProfilePic={this.uploadProfilePic}
-                            closePictureUpload={this.closePictureUpload}
-                            setFile={this.setFile}
-                        />
-                    )}
-                </header>
+        if (!this.state.userData) {
+            return <img src="/spinner.gif" />;
+        } else {
+            return (
+                <div id="appNavigation">
+                    <header>
+                        <a id="logout" href="/logout">
+                            Logout
+                        </a>
+                        <Logo />
+                        <a onClick={this.showPictureUpload}>
+                            {this.state.userData && (
+                                <Profilepic {...this.state} />
+                            )}
+                        </a>
+                        {this.state.open && (
+                            <Upload
+                                {...this.state}
+                                uploadProfilePic={this.uploadProfilePic}
+                                closePictureUpload={this.closePictureUpload}
+                                setFile={this.setFile}
+                            />
+                        )}
+                    </header>
 
-                <BrowserRouter>
-                    <div className="BrowserRouter">
-                        <Link id="backToProfile" to="/">
-                            My Profile
-                        </Link>
-                        <Route
-                            exact
-                            path="/user/:userId"
-                            component={OtherProfile}
-                        />
-                        <Route
-                            exact
-                            path="/"
-                            render={() => <Profile {...this.state} />}
-                        />
-                    </div>
-                </BrowserRouter>
-            </div>
-        );
+                    <BrowserRouter>
+                        <div className="BrowserRouter">
+                            <Link id="backToProfile" to="/">
+                                My Profile
+                            </Link>
+                            <Route
+                                exact
+                                path="/user/:userId"
+                                component={OtherProfile}
+                            />
+                            <Route
+                                exact
+                                path="/"
+                                render={() => <Profile {...this.state} />}
+                            />
+                        </div>
+                    </BrowserRouter>
+                </div>
+            );
+        }
     }
 }
