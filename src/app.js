@@ -100,13 +100,6 @@ export class App extends React.Component {
                         <Link id="backToProfile" to="/">
                             My Profile
                         </Link>
-                        {/*<Link id="profileLinks" to="/user/2">
-                                <div>User2</div>
-                            </Link>
-                            <Link to="/user/3">
-                                <div>User3</div>
-                            </Link>*/}
-
                         <Route
                             exact
                             path="/user/:userId"

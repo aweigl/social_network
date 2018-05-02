@@ -159,7 +159,6 @@ app.post("/login", (req, res) => {
                     req.session.userId = response.rows[0].id;
                     checkPassword(req.body.password, response.rows[0].pass)
                         .then(response => {
-                            console.log(response);
                             if (response) {
                                 res.json({
                                     success: true,
@@ -216,6 +215,7 @@ app.post("/bioSubmission", (req, res) => {
     if (req.body) {
         bioInsert(req.body.bio, req.session.userId)
             .then(response => {
+                response.rows[0].pass = null;
                 console.log(response.rows[0]);
                 res.json({
                     success: true,

@@ -14,9 +14,8 @@ header {
 
 #logout {
     position: absolute;
-    right: 0px;
-    top: 90vh;
-    margin: 2vw;
+    right: 1vw;
+    bottom: 1vw;
     border-radius: 5px;
     padding: 6px;
     text-decoration: none;
@@ -253,13 +252,13 @@ header {
 }
 
 #backToProfile {
-    margin: 2vw;
     border-radius: 5px;
     padding: 6px;
     text-decoration: none;
     background-color: #003E53;
     color: white;
-    position: relative;
-    top: 77vh;
-    left: 91.6vw;
+    position: fixed;
+    top: 15vh;
+    right: 1vw;
+    z-index: 1
 }
