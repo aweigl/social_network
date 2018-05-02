@@ -57,12 +57,14 @@ export class Register extends React.Component {
                     <input
                         placeholder="E-mail"
                         name="mail"
+                        type="email"
                         onChange={this.inputChange}
                     />
 
                     <input
                         placeholder="Password"
                         name="password"
+                        type="password"
                         onChange={this.inputChange}
                     />
 

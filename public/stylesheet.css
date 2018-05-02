@@ -200,18 +200,23 @@ header {
     padding: 3vh;
 }
 
+.input button {
+    cursor: pointer;
+}
+
 .register {
     display: flex;
     justify-content: space-evenly;
 }
 
 .register input {
-    /* border-radius: 2vh; */
+    font-size: 15px;
     height: 3vh;
     width: 11vw;
 }
 
 .register button {
+    font-size: 15px;
     width: 8vw;
     border-radius: 8px;
 }

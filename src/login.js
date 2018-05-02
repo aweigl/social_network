@@ -39,6 +39,7 @@ export class Login extends React.Component {
                 <div id="loginMail">
                     <input
                         placeholder="E-mail"
+                        type="email"
                         name="mail"
                         onChange={this.inputChange}
                     />
@@ -47,6 +48,7 @@ export class Login extends React.Component {
                     <input
                         placeholder="Password"
                         name="password"
+                        type="password"
                         onChange={this.inputChange}
                     />
                 </div>
