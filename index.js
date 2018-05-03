@@ -11,7 +11,8 @@ const {
     checkFriendshipStatus,
     makeFriendRequest,
     acceptFriendRequest,
-    endFriendship
+    endFriendship,
+    checkFriends
 } = require("./db.js");
 const { hashPassword, checkPassword } = require("./bcrypt.js");
 const cookieSession = require("cookie-session");
@@ -233,6 +234,19 @@ app.post("/bioSubmission", (req, res) => {
 });
 
 //////////Friendships////////////////////
+app.get("/checkFriends", (req, res) => {
+    checkFriends(req.session.userId)
+        .then(response => {
+            res.json({
+                success: true,
+                friends: response.rows
+            });
+        })
+        .catch(e => {
+            console.log(e);
+        });
+});
+
 app.get("/friendshipStatus/:profileId", (req, res) => {
     console.log(req.params.profileId);
     checkFriendshipStatus(req.session.userId, req.params.profileId)

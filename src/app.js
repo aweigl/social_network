@@ -6,7 +6,7 @@ import { Profilepic } from "./profilepic";
 import { Profile } from "./profile";
 import { Upload } from "./upload";
 import { OtherProfile } from "./otherprofile";
-import { Friends } from "./friends";
+import Friends from "./friends";
 
 export class App extends React.Component {
     constructor(props) {

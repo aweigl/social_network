@@ -291,3 +291,9 @@ header {
     right: 1vw;
     z-index: 1
 }
+
+/* FRIENDS */
+
+.friends img {
+    height: 10vh
+}

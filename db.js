@@ -36,6 +36,13 @@ exports.bioInsert = (bio, id) => {
     ]);
 };
 
+exports.checkFriends = id => {
+    return db.query(
+        "SELECT users.id, first, last, profilepic, status FROM friendships JOIN users ON (status = 1 AND receiver_id = $1 AND requester_id = users.id) OR (status = 2 AND receiver_id = $1 AND requester_id = users.id) OR (status = 2 AND requester_id = $1 AND receiver_id = users.id)",
+        [id]
+    );
+};
+
 exports.checkFriendshipStatus = (requester, receiver) => {
     return db.query(
         "SELECT * FROM friendships WHERE requester_id=$1 AND receiver_id=$2 OR requester_id=$2 AND receiver_id=$1",

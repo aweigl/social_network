@@ -1,24 +1,57 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { reducer } from "./reducer";
+import { getFriendInfo, acceptFriend } from "./actions";
+import User from "./users";
 
-export class Friends extends React.Component {
+class Friends extends React.Component {
     componentDidMount() {
-        this.props.dispatch(reducer());
+        this.props.dispatch(getFriendInfo());
     }
     render() {
-        return <h1>HelloWorld</h1>;
+        console.log(this.props.friends);
+        let { friends } = this.props;
+        let { notFriends } = this.props;
+        if (!this.props.friends) {
+            return null;
+        } else {
+            return (
+                <div>
+                    <div>PEOPLE WHO ARE YOUR FRIENDS</div>
+                    <div className="friends">
+                        {friends.map(friend => (
+                            <User
+                                {...this.props}
+                                friend={friend}
+                                id={friend.id}
+                            />
+                        ))}
+                    </div>
+                    <div>PEOPLE THAT WANT TO BE YOUR FRIENDS</div>
+                    <div className="notFriends">
+                        {notFriends.map(friend => (
+                            <User
+                                {...this.props}
+                                friend={friend}
+                                id={friend.id}
+                            />
+                        ))}
+                    </div>
+                </div>
+            );
+        }
     }
 }
 
-/////MAPSTATETOPROP FUNCTION///////
-//friends, and those who want to be
-
 const mapStateToProps = state => {
+    console.log(state.friends);
     return {
-        notFriends: {},
-        friends: {}
+        notFriends:
+            state.friends && state.friends.filter(friend => friend.status == 1),
+        friends:
+            state.friends && state.friends.filter(friend => friend.status == 2)
     };
 };
 
-const connectedFriends = connect(mapStateToProps)(Friends);
+export default connect(mapStateToProps)(Friends);
