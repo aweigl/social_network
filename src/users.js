@@ -19,7 +19,7 @@ export default function User(props) {
                         props.dispatch(acceptFriend(id));
                     }}
                 >
-                    Accept friend request
+                    Accept
                 </button>
             )}
             {friend.status == 2 && (
@@ -28,7 +28,7 @@ export default function User(props) {
                         props.dispatch(removeFriend(id));
                     }}
                 >
-                    Remove from friend-list
+                    Remove
                 </button>
             )}
         </div>

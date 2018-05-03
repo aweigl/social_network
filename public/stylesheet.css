@@ -307,6 +307,7 @@ header {
 }
 
 #friendList button {
+    font-size: 15px;
     border-radius: 5px;
     padding: 6px;
     text-decoration: none;
@@ -322,9 +323,9 @@ header {
     margin-bottom: 5vh;
     margin-top: 3vh;
     text-align: center;
-    background-color: #003E53;
-    color: white;
-    font-size: 1vw;
+    color: #003E53;
+    font-size: 27px;
+    font-family: 'Quattrocento';
 }
 
 .friends {
@@ -340,11 +341,13 @@ header {
 }
 
 .friends img {
+    border-radius: 2vh;
     height: 15vh;
     width: 15vh
 }
 
 .notFriends img {
+    border-radius: 2vh;
     height: 15vh;
     width: 15vh
 }
