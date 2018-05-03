@@ -12,6 +12,13 @@ header {
     padding-bottom: 1vh;
 }
 
+#spinner {
+    height: 15vh;
+    position: absolute;
+    left: 45%;
+    top: 45%;
+}
+
 #logout {
     position: absolute;
     right: 1vw;

@@ -6,6 +6,7 @@ import { Profilepic } from "./profilepic";
 import { Profile } from "./profile";
 import { Upload } from "./upload";
 import { OtherProfile } from "./otherprofile";
+import { Friends } from "./friends";
 
 export class App extends React.Component {
     constructor(props) {
@@ -76,7 +77,7 @@ export class App extends React.Component {
     }
     render() {
         if (!this.state.userData) {
-            return <img src="/spinner.gif" />;
+            return <img id="spinner" src="/spinner.gif" />;
         } else {
             return (
                 <div id="appNavigation">
@@ -105,6 +106,10 @@ export class App extends React.Component {
                             <Link id="backToProfile" to="/">
                                 My Profile
                             </Link>
+                            <Link id="friendsList" to="/friends">
+                                Friends
+                            </Link>
+                            <Route exact path="/friends" component={Friends} />
                             <Route
                                 exact
                                 path="/user/:userId"

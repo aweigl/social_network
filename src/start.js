@@ -5,14 +5,26 @@ import { Logo } from "./logo";
 import { Register } from "./register";
 import { App } from "./app";
 let component;
+////Redux//////
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import reduxPromise from "redux-promise";
+import { reducer } from "./reducer";
+import { composeWithDevTools } from "redux-devtools-extension";
+
+const store = createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(reduxPromise))
+);
 
 if (location.pathname == "/welcome") {
     component = <Welcome />;
 } else {
-    component = <App />;
+    component = (
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
 }
 
 ReactDOM.render(component, document.querySelector("main"));
-
-///giving divs classes hast to have className=""!!!!
-///style={{'color':'tomato'}} to change style of div
