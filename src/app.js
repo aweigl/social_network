@@ -106,7 +106,7 @@ export class App extends React.Component {
                             <Link id="backToProfile" to="/">
                                 My Profile
                             </Link>
-                            <Link id="friendsList" to="/friends">
+                            <Link id="friendsListLink" to="/friends">
                                 Friends
                             </Link>
                             <Route exact path="/friends" component={Friends} />

@@ -17,8 +17,8 @@ class Friends extends React.Component {
             return null;
         } else {
             return (
-                <div>
-                    <div>PEOPLE WHO ARE YOUR FRIENDS</div>
+                <div id="friendList">
+                    <div id="notation">YOUR FRIENDS</div>
                     <div className="friends">
                         {friends.map(friend => (
                             <User
@@ -29,7 +29,7 @@ class Friends extends React.Component {
                             />
                         ))}
                     </div>
-                    <div>PEOPLE THAT WANT TO BE YOUR FRIENDS</div>
+                    <div id="notation">FRIEND REQUESTS</div>
                     <div className="notFriends">
                         {notFriends.map(friend => (
                             <User

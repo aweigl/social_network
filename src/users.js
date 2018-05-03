@@ -11,8 +11,7 @@ export default function User(props) {
             {friend.profilepic && <img src={friend.profilepic} />}
             {!friend.profilepic && <img src="default.png" />}
             <p>
-                {friend.first}
-                {friend.last}
+                {friend.first} {friend.last}
             </p>
             {friend.status == 1 && (
                 <button
