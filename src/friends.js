@@ -22,9 +22,10 @@ class Friends extends React.Component {
                     <div className="friends">
                         {friends.map(friend => (
                             <User
+                                id={friend.id}
                                 {...this.props}
                                 friend={friend}
-                                id={friend.id}
+                                key={friend.id}
                             />
                         ))}
                     </div>
@@ -32,9 +33,10 @@ class Friends extends React.Component {
                     <div className="notFriends">
                         {notFriends.map(friend => (
                             <User
+                                id={friend.id}
                                 {...this.props}
                                 friend={friend}
-                                id={friend.id}
+                                key={friend.id}
                             />
                         ))}
                     </div>
