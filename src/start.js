@@ -17,6 +17,14 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(reduxPromise))
 );
 
+////SOCKET.IO/////
+import * as io from "socket.io-client";
+const socket = io.connect();
+
+socket.on("currentUser", data => {
+    console.log(data);
+});
+
 if (location.pathname == "/welcome") {
     component = <Welcome />;
 } else {

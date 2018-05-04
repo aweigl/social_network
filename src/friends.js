@@ -10,7 +10,6 @@ class Friends extends React.Component {
         this.props.dispatch(getFriendInfo());
     }
     render() {
-        console.log(this.props.friends);
         let { friends } = this.props;
         let { notFriends } = this.props;
         if (!this.props.friends) {

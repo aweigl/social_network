@@ -1,5 +1,9 @@
 const express = require("express");
 const app = express();
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    origins: "localhost:8080 || 192.168.50.155:8080"
+});
 const compression = require("compression");
 const bodyParser = require("body-parser");
 const {
@@ -61,14 +65,18 @@ app.use(
     })
 );
 
-app.use(
-    cookieSession({
-        name: "session",
-        keys: ["Super secret key"],
-        // Cookie Options
-        maxAge: 24 * 60 * 60 * 1000
-    })
-);
+const cookieSessionMiddleware = cookieSession({
+    name: "session",
+    keys: ["Super secret key"],
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000
+});
+
+app.use(cookieSessionMiddleware);
+io.use((socket, next) => {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+
 app.use(csurf());
 
 app.use(function(req, res, next) {
@@ -92,6 +100,9 @@ function requireLogin(req, res, next) {
 app.get("/userInfo", requireLogin, (req, res) => {
     getUserInfo(req.session.userId)
         .then(response => {
+            req.session.user = {
+                ...response.rows[0]
+            };
             response.rows[0].pass = null;
             res.json({
                 success: true,
@@ -217,7 +228,6 @@ app.post("/bioSubmission", (req, res) => {
         bioInsert(req.body.bio, req.session.userId)
             .then(response => {
                 response.rows[0].pass = null;
-                console.log(response.rows[0]);
                 res.json({
                     success: true,
                     userData: response.rows[0]
@@ -248,10 +258,8 @@ app.get("/checkFriends", (req, res) => {
 });
 
 app.get("/friendshipStatus/:profileId", (req, res) => {
-    console.log(req.params.profileId);
     checkFriendshipStatus(req.session.userId, req.params.profileId)
         .then(response => {
-            console.log(response);
             if (response.rowCount != 0) {
                 res.json({
                     success: true,
@@ -329,6 +337,22 @@ app.get("*", requireLogin, (req, res) => {
     }
 });
 
-app.listen(8080, () => {
+let onlineUsers = [];
+
+io.on("connection", socket => {
+    let session = socket.request.session;
+    // console.log("Socket session", session);
+    socket.on("newLogin", data => {
+        if (!onlineUsers.includes(data.newLogin)) {
+            onlineUsers.unshift(data.newLogin);
+            console.log("NEW LOGIN", onlineUsers);
+        }
+    });
+    socket.on("disconnect", () => {
+        console.log(`${session.userId} disconnected`);
+    });
+});
+
+server.listen(8080, () => {
     console.log("I'm listening.");
 });
