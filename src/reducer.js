@@ -5,7 +5,6 @@ export const reducer = (state = {}, action) => {
     }
     if (action.type == "ACCEPT_REQUEST") {
         const { status } = action;
-        console.log(state);
         state.friends.forEach(user => {
             if (user.id == action.profileId) {
                 user.status = 2;
@@ -28,16 +27,14 @@ export const reducer = (state = {}, action) => {
         const onlineUserList = state.onlineUserList.filter(
             user => user.id != userId
         );
-        console.log("REMAININGUSERS", onlineUserList);
         return { ...state, onlineUserList };
     }
     if (action.type == "USER_JOINED") {
         let newUser = action.newUser.newUser;
-        if (state.onlineUserList) {
-            let { onlineUserList } = state;
-            onlineUserList.push(newUser);
-            return { ...state, onlineUserList };
-        }
+        return {
+            ...state,
+            onlineUserList: state.onlineUserList.concat(newUser)
+        };
     }
     return state;
 };

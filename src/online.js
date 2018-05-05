@@ -25,7 +25,7 @@ class Online extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        onlineUserList: state.onlineUserList
+        onlineUserList: state && state.onlineUserList
     };
 };
 

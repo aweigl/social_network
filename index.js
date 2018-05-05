@@ -344,12 +344,6 @@ let onlineUserList = [];
 io.on("connection", socket => {
     let session = socket.request.session;
 
-    getUserInfo(session.userId).then(response => {
-        io.sockets.sockets[socket.id].broadcast.emit("userJoined", {
-            newUser: response.rows[0]
-        });
-    });
-
     onlineUserList.push({
         socketId: socket.id,
         userId: session.userId
@@ -357,13 +351,19 @@ io.on("connection", socket => {
     const onlineUserIds = onlineUserList.map(user => user.userId);
     onlineUsers(onlineUserIds)
         .then(response => {
-            io.sockets.sockets[socket.id].broadcast.emit("onlineUsers", {
+            socket.emit("onlineUsers", {
                 onlineUserList: response.rows
             });
         })
         .catch(e => {
             console.log(e);
         });
+
+    getUserInfo(session.userId).then(response => {
+        socket.broadcast.emit("userJoined", {
+            newUser: response.rows[0]
+        });
+    });
 
     socket.on("disconnect", () => {
         console.log(`${session.userId} disconnected`);
@@ -376,7 +376,7 @@ io.on("connection", socket => {
                 user.userId == session.userId;
             })
         ) {
-            io.sockets.emit("userLeft", {
+            io.emit("userLeft", {
                 userId: session.userId
             });
         }
