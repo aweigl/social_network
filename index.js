@@ -16,7 +16,8 @@ const {
     makeFriendRequest,
     acceptFriendRequest,
     endFriendship,
-    checkFriends
+    checkFriends,
+    onlineUsers
 } = require("./db.js");
 const { hashPassword, checkPassword } = require("./bcrypt.js");
 const cookieSession = require("cookie-session");
@@ -316,6 +317,7 @@ app.post("/endFriendship/:profileId", (req, res) => {
         });
 });
 /////////////////////////////
+
 app.get("/logout", (req, res) => {
     req.session.userId = null;
     res.redirect("/welcome");
@@ -337,19 +339,42 @@ app.get("*", requireLogin, (req, res) => {
     }
 });
 
-let onlineUsers = [];
+let onlineUserList = [];
 
 io.on("connection", socket => {
     let session = socket.request.session;
-    // console.log("Socket session", session);
-    socket.on("newLogin", data => {
-        if (!onlineUsers.includes(data.newLogin)) {
-            onlineUsers.unshift(data.newLogin);
-            console.log("NEW LOGIN", onlineUsers);
-        }
+
+    onlineUserList.push({
+        socketId: socket.id,
+        userId: session.userId
     });
+    const onlineUserIds = onlineUserList.map(user => user.userId);
+    onlineUsers(onlineUserIds)
+        .then(response => {
+            socket.emit("onlineUsers", {
+                onlineUserList: response.rows
+            });
+        })
+        .catch(e => {
+            console.log(e);
+        });
+
     socket.on("disconnect", () => {
         console.log(`${session.userId} disconnected`);
+        onlineUserList = onlineUserList.filter(
+            user => user.socketId != socket.id
+        );
+        console.log(onlineUserList);
+
+        if (
+            !onlineUserList.find(user => {
+                user.userId == session.userId;
+            })
+        ) {
+            io.sockets.emit("userLeft", {
+                userId: session.userId
+            });
+        }
     });
 });
 

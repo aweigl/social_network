@@ -1,6 +1,5 @@
 export const reducer = (state = {}, action) => {
     if (action.type == "GET_FRIEND_LIST") {
-        console.log("Action Data", action);
         const { friends } = action;
         return { ...state, friends };
     }
@@ -19,6 +18,18 @@ export const reducer = (state = {}, action) => {
             friend => friend.id != action.profileId
         );
         return { ...state, friends };
+    }
+    if (action.type == "ONLINE_USERS") {
+        const { onlineUserList } = action;
+        return { ...state, ...onlineUserList };
+    }
+    if (action.type == "USER_LEFT") {
+        let userId = action.userId.userId;
+        const onlineUserList = state.onlineUserList.filter(
+            user => user.id != userId
+        );
+        console.log("REMAININGUSERS", onlineUserList);
+        return { ...state, onlineUserList };
     }
     return state;
 };

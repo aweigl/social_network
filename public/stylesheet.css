@@ -359,3 +359,9 @@ header {
 .notFriends div {
     display: grid;
 }
+
+/* online */
+
+#onlineUsers img {
+    height: 10vh
+}

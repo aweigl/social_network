@@ -7,8 +7,7 @@ import { Profile } from "./profile";
 import { Upload } from "./upload";
 import { OtherProfile } from "./otherprofile";
 import Friends from "./friends";
-import * as io from "socket.io-client";
-const socket = io.connect();
+import Online from "./online";
 
 export class App extends React.Component {
     constructor(props) {
@@ -71,9 +70,6 @@ export class App extends React.Component {
         try {
             const response = await axios.get("/userInfo");
             if (response.data.success) {
-                socket.emit("newLogin", {
-                    newLogin: response.data.userData.id
-                });
                 this.setState({ userData: response.data.userData });
             }
         } catch (e) {
@@ -114,6 +110,10 @@ export class App extends React.Component {
                             <Link id="friendsListLink" to="/friends">
                                 Friends
                             </Link>
+                            <Link id="onlineUsers" to="/online">
+                                Who's online?
+                            </Link>
+                            <Route exact path="/online" component={Online} />
                             <Route exact path="/friends" component={Friends} />
                             <Route
                                 exact

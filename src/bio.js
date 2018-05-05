@@ -1,7 +1,6 @@
 import React from "react";
 
 export function Bio(props) {
-    console.log("BioProps", props);
     return (
         <div id="bioText">
             {!props.changeBio &&

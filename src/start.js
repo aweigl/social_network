@@ -11,23 +11,17 @@ import { Provider } from "react-redux";
 import reduxPromise from "redux-promise";
 import { reducer } from "./reducer";
 import { composeWithDevTools } from "redux-devtools-extension";
+import initSocket from "./socket";
 
 const store = createStore(
     reducer,
     composeWithDevTools(applyMiddleware(reduxPromise))
 );
 
-////SOCKET.IO/////
-import * as io from "socket.io-client";
-const socket = io.connect();
-
-socket.on("currentUser", data => {
-    console.log(data);
-});
-
 if (location.pathname == "/welcome") {
     component = <Welcome />;
 } else {
+    initSocket(store);
     component = (
         <Provider store={store}>
             <App />

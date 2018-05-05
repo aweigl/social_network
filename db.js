@@ -70,3 +70,10 @@ exports.endFriendship = (requester, receiver) => {
         [requester, receiver]
     );
 };
+
+exports.onlineUsers = onlineUserIds => {
+    return db.query(
+        "SELECT id,first,last,profilepic FROM users WHERE id=ANY($1)",
+        [onlineUserIds]
+    );
+};

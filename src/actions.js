@@ -37,3 +37,17 @@ export const removeFriend = async profileId => {
         console.log(e);
     }
 };
+
+export const onlineUsers = onlineUsers => {
+    return {
+        type: "ONLINE_USERS",
+        onlineUserList: onlineUsers
+    };
+};
+
+export const userLeft = userId => {
+    return {
+        type: "USER_LEFT",
+        userId
+    };
+};
