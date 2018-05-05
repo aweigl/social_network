@@ -344,6 +344,12 @@ let onlineUserList = [];
 io.on("connection", socket => {
     let session = socket.request.session;
 
+    getUserInfo(session.userId).then(response => {
+        io.sockets.sockets[socket.id].broadcast.emit("userJoined", {
+            newUser: response.rows[0]
+        });
+    });
+
     onlineUserList.push({
         socketId: socket.id,
         userId: session.userId
@@ -351,7 +357,7 @@ io.on("connection", socket => {
     const onlineUserIds = onlineUserList.map(user => user.userId);
     onlineUsers(onlineUserIds)
         .then(response => {
-            socket.emit("onlineUsers", {
+            io.sockets.sockets[socket.id].broadcast.emit("onlineUsers", {
                 onlineUserList: response.rows
             });
         })
@@ -364,7 +370,6 @@ io.on("connection", socket => {
         onlineUserList = onlineUserList.filter(
             user => user.socketId != socket.id
         );
-        console.log(onlineUserList);
 
         if (
             !onlineUserList.find(user => {

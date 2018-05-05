@@ -31,5 +31,13 @@ export const reducer = (state = {}, action) => {
         console.log("REMAININGUSERS", onlineUserList);
         return { ...state, onlineUserList };
     }
+    if (action.type == "USER_JOINED") {
+        let newUser = action.newUser.newUser;
+        if (state.onlineUserList) {
+            let { onlineUserList } = state;
+            onlineUserList.push(newUser);
+            return { ...state, onlineUserList };
+        }
+    }
     return state;
 };

@@ -51,3 +51,10 @@ export const userLeft = userId => {
         userId
     };
 };
+
+export const userJoined = newUser => {
+    return {
+        type: "USER_JOINED",
+        newUser
+    };
+};
