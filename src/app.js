@@ -145,6 +145,16 @@ export class App extends React.Component {
                                                 onClick={this.removeResults}
                                             >
                                                 <p>
+                                                    {user.profilepic && (
+                                                        <img
+                                                            src={
+                                                                user.profilepic
+                                                            }
+                                                        />
+                                                    )}
+                                                    {!user.profilepic && (
+                                                        <img src="/default.png" />
+                                                    )}
                                                     {user.first} {user.last}
                                                 </p>
                                             </Link>
@@ -161,7 +171,7 @@ export class App extends React.Component {
                                     aria-haspopup="true"
                                     aria-expanded="false"
                                 >
-                                    Menu
+                                    {this.state.userData.first}
                                 </button>
                                 <div
                                     className="dropdown-menu"

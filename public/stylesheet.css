@@ -3,32 +3,40 @@
 }
 
 body {
-    margin: 0
+    margin: 0, auto;
+    overflow: hidden
 }
 
 header {
     height: 100%;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #ced4da;
     padding-bottom: 1vh;
 }
 
 #searchInput {
     position: relative;
     top: 3vh;
-    left: 44vw;
+    left: 42vw;
 }
 
 #userResult {
     display: grid;
     justify-content: center;
     position: absolute;
+    padding-top: 15px;
     top: 7vh;
-    left: 44vw;
+    left: 42vw;
     background-color: white;
     border: 1px solid #ced4da;
     border-radius: 8px;
     width: 192px;
     z-index: 1;
+}
+
+#userResult img {
+    width: 3vh;
+    height: 3vh;
+    margin-right: 15px;
 }
 
 #userResult p {
@@ -38,8 +46,8 @@ header {
 
 .btn-secondary {
     position: absolute;
-    right: 3vw;
-    top: 1vh;
+    right: 43vw;
+    top: -10vh;
     background-color: #003E53;
     color: white;
 }
@@ -123,7 +131,7 @@ header {
 }
 
 #bioText {
-    border: 1px solid;
+    border: 1px solid #ced4da;
     padding: 1vw;
     border-radius: 1vw;
 }
