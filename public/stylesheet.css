@@ -17,6 +17,7 @@ header {
     position: relative;
     top: 3vh;
     left: 42vw;
+    width: 11vw;
 }
 
 #userResult {

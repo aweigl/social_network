@@ -70,6 +70,13 @@ export class App extends React.Component {
                 this.closePictureUpload();
             }
         });
+        window.addEventListener("mousedown", e => {
+            if (e.target != document.getElementsByTagName("#userResult")) {
+                this.setState({
+                    searchUsers: null
+                });
+            }
+        });
         try {
             const response = await axios.get("/userInfo");
             if (response.data.success) {
