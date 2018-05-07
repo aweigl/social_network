@@ -17,7 +17,8 @@ const {
     acceptFriendRequest,
     endFriendship,
     checkFriends,
-    onlineUsers
+    onlineUsers,
+    searchUsers
 } = require("./db.js");
 const { hashPassword, checkPassword } = require("./bcrypt.js");
 const cookieSession = require("cookie-session");
@@ -318,6 +319,17 @@ app.post("/endFriendship/:profileId", (req, res) => {
 });
 /////////////////////////////
 
+app.get("/search/:string", (req, res) => {
+    searchUsers(req.params.string).then(response => {
+        console.log(response.rows);
+        res.json({
+            sucess: true,
+            user: response.rows
+        });
+    });
+});
+
+////////////////////////////
 app.get("/logout", (req, res) => {
     req.session.userId = null;
     res.redirect("/welcome");
@@ -348,6 +360,7 @@ io.on("connection", socket => {
         socketId: socket.id,
         userId: session.userId
     });
+
     const onlineUserIds = onlineUserList.map(user => user.userId);
     onlineUsers(onlineUserIds)
         .then(response => {

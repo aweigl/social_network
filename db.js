@@ -77,3 +77,10 @@ exports.onlineUsers = onlineUserIds => {
         [onlineUserIds]
     );
 };
+
+exports.searchUsers = string => {
+    return db.query(
+        "SELECT first, last, id FROM users WHERE LOWER(first) LIKE '%' || $1 || '%' OR LOWER(last) LIKE '%' || $1 || '%' ORDER BY LOWER(first) ASC",
+        [string]
+    );
+};

@@ -22,19 +22,19 @@ export const reducer = (state = {}, action) => {
         const { onlineUserList } = action;
         return { ...state, ...onlineUserList };
     }
-    if (action.type == "USER_LEFT") {
-        let userId = action.userId.userId;
-        const onlineUserList = state.onlineUserList.filter(
-            user => user.id != userId
-        );
-        return { ...state, onlineUserList };
-    }
     if (action.type == "USER_JOINED") {
         let newUser = action.newUser.newUser;
         return {
             ...state,
             onlineUserList: state.onlineUserList.concat(newUser)
         };
+    }
+    if (action.type == "USER_LEFT") {
+        let userId = action.userId.userId;
+        const onlineUserList = state.onlineUserList.filter(
+            user => user.id != userId
+        );
+        return { ...state, onlineUserList };
     }
     return state;
 };

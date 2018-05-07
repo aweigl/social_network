@@ -6,13 +6,16 @@ export default function User(props) {
 
     let { friend } = props;
     let { id } = props;
+    let userUrl = `user/${friend.id}`;
     return (
         <div>
-            {friend.profilepic && <img src={friend.profilepic} />}
-            {!friend.profilepic && <img src="default.png" />}
-            <p>
-                {friend.first} {friend.last}
-            </p>
+            <a href={userUrl}>
+                {friend.profilepic && <img src={friend.profilepic} />}
+                {!friend.profilepic && <img src="default.png" />}
+                <p id="userUrl">
+                    {friend.first} {friend.last}
+                </p>
+            </a>
             {friend.status == 1 && (
                 <button
                     onClick={() => {

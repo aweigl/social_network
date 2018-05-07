@@ -17,6 +17,8 @@ export class App extends React.Component {
         this.closePictureUpload = this.closePictureUpload.bind(this);
         this.uploadProfilePic = this.uploadProfilePic.bind(this);
         this.setFile = this.setFile.bind(this);
+        this.inputChange = this.inputChange.bind(this);
+        this.removeResults = this.removeResults.bind(this);
     }
     showPictureUpload() {
         this.setState({ open: true });
@@ -61,6 +63,7 @@ export class App extends React.Component {
         }
     }
     //////////////////////////////
+
     async componentDidMount() {
         window.addEventListener("keyup", e => {
             if (e.keyCode == "27") {
@@ -76,10 +79,27 @@ export class App extends React.Component {
             console.log(e);
         }
     }
+    /////////////
+    inputChange(e) {
+        this.search = e.target.value;
+        axios.get(`/search/${this.search}`).then(response => {
+            this.setState({
+                searchUsers: response.data.user
+            });
+        });
+    }
+    removeResults() {
+        this.setState({
+            oldSearch: this.state.searchUsers,
+            searchUsers: null
+        });
+    }
+
     render() {
         if (!this.state.userData) {
             return <img id="spinner" src="/spinner.gif" />;
         } else {
+            let { searchUsers } = this.state;
             return (
                 <div id="appNavigation">
                     <header>
@@ -92,6 +112,17 @@ export class App extends React.Component {
                                 <Profilepic {...this.state} />
                             )}
                         </a>
+                        <div id="searchInput">
+                            <form className="form-inline my-2 my-lg-0">
+                                <input
+                                    className="form-control mr-sm-2"
+                                    type="search"
+                                    placeholder="Search"
+                                    aria-label="Search"
+                                    onChange={this.inputChange}
+                                />
+                            </form>
+                        </div>
                         {this.state.open && (
                             <Upload
                                 {...this.state}
@@ -103,16 +134,57 @@ export class App extends React.Component {
                     </header>
 
                     <BrowserRouter>
-                        <div className="BrowserRouter">
-                            <Link id="backToProfile" to="/">
-                                My Profile
-                            </Link>
-                            <Link id="friendsListLink" to="/friends">
-                                Friends
-                            </Link>
-                            <Link id="onlineUsers" to="/online">
-                                Who's online?
-                            </Link>
+                        <div>
+                            {this.state.searchUsers && (
+                                <div id="userResult">
+                                    {searchUsers.map(user => {
+                                        return (
+                                            <Link
+                                                to={`/user/${user.id}`}
+                                                key={user.id}
+                                                onClick={this.removeResults}
+                                            >
+                                                <p>
+                                                    {user.first} {user.last}
+                                                </p>
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                            <div className="dropdown">
+                                <button
+                                    className="btn btn-secondary dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    Menu
+                                </button>
+                                <div
+                                    className="dropdown-menu"
+                                    aria-labelledby="dropdownMenuButton"
+                                >
+                                    <li id="dropdown-list">
+                                        <Link id="dropdown-link" to="/">
+                                            My Profile
+                                        </Link>
+                                    </li>
+                                    <li id="dropdown-list">
+                                        <Link id="dropdown-link" to="/friends">
+                                            Friends
+                                        </Link>
+                                    </li>
+                                    <li id="dropdown-list">
+                                        <Link id="dropdown-link" to="/online">
+                                            Who's online?
+                                        </Link>
+                                    </li>
+                                </div>
+                            </div>
+
                             <Route exact path="/online" component={Online} />
                             <Route exact path="/friends" component={Friends} />
                             <Route

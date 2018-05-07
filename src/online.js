@@ -14,6 +14,7 @@ class Online extends React.Component {
                     {onlineUserList.map(user => (
                         <div key={user.id} id="onlineUsers">
                             <img src={user.profilepic} />
+                            {!user.profilepic && <img src="default.png" />}
                             {user.first} {user.last}
                         </div>
                     ))}
