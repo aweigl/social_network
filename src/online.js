@@ -10,7 +10,7 @@ class Online extends React.Component {
             return null;
         } else {
             return (
-                <div>
+                <div id="onlineDivs">
                     {onlineUserList.map(user => (
                         <div key={user.id} id="onlineUsers">
                             <img src={user.profilepic} />

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { socketEmit } from "./socket";
 import { clearTyping } from "./actions";
+import { Link } from "react-router-dom";
 
 class Chat extends React.Component {
     componentDidMount() {
@@ -26,7 +27,7 @@ class Chat extends React.Component {
             clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 socketEmit("clearTyping", {});
-            }, 3000);
+            }, 2000);
         });
     }
     componentDidUpdate() {
@@ -49,7 +50,7 @@ class Chat extends React.Component {
             return (
                 <div className="messenger">
                     {this.props.typer && (
-                        <p>
+                        <p id="typing">
                             {this.props.typer.first}
                             ...is typing
                         </p>
@@ -74,7 +75,9 @@ class Chat extends React.Component {
                                                 src={user.profilepic}
                                             />
                                             <p id="chatUser">
-                                                {user.first} {user.last}
+                                                <Link to={`user/${user.id}`}>
+                                                    {user.first} {user.last}
+                                                </Link>
                                             </p>
                                         </div>
 
