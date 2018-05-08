@@ -58,3 +58,24 @@ export const userJoined = newUser => {
         newUser
     };
 };
+
+export const chatMessages = data => {
+    return {
+        type: "CHAT_MESSAGES",
+        chatMessages: data.chatMessages
+    };
+};
+
+export const typing = data => {
+    return {
+        type: "SOMEONE_TYPING",
+        typer: data
+    };
+};
+
+export const clearTyping = () => {
+    return {
+        type: "CLEAR_TYPING",
+        typer: ""
+    };
+};

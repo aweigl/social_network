@@ -1,10 +1,10 @@
 * {
-    font-family: 'Quattrocento', serif;
+    font-family: "Quattrocento", serif;
 }
 
 body {
     margin: 0, auto;
-    overflow: hidden
+    overflow: hidden;
 }
 
 header {
@@ -49,27 +49,79 @@ header {
     position: absolute;
     right: 43vw;
     top: -10vh;
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
 }
 
 .btn-secondary:hover {
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
 }
 
 .show>.btn-secondary.dropdown-toggle {
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
 }
 
 #dropdown-link {
     text-decoration: none;
-    color: grey
+    color: grey;
 }
 
 #dropdown-list:hover {
-    background-color: #D3D3D3;
+    background-color: #d3d3d3;
+}
+
+.messenger {
+    display: grid;
+    justify-content: center;
+    position: relative;
+    top: 4vh;
+}
+
+#chatUser {
+    text-decoration: underline;
+}
+
+#timestamp {
+    font-size: 10px
+}
+
+.chatPic {
+    height: 6vh;
+    margin-right: 1vw;
+}
+
+#picUser {
+    display: flex;
+    margin-bottom: 1vh;
+}
+
+#chatBox {
+    position: absolute;
+    left: 3vw;
+    top: 16vh;
+    width: 60vw;
+}
+
+#chatField {
+    width: 60vw;
+    height: 10vh;
+    margin-top: 1vh;
+    border-radius: 4px;
+    border: 1px solid #d3d3d3;
+}
+
+#messageBoard {
+    height: 67vh;
+    width: 60vw;
+    border: 1px solid #d3d3d3;
+    overflow: scroll;
+    padding-left: 2vw;
+    background-color: #003e53;
+    color: white;
+    border-radius: 2vh;
+    padding-top: 3vh;
 }
 
 #spinner {
@@ -86,7 +138,7 @@ header {
     border-radius: 5px;
     padding: 6px;
     text-decoration: none;
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
 }
 
@@ -103,7 +155,7 @@ header {
     position: fixed;
     height: 11vh;
     left: 1vh;
-    top: 1vh
+    top: 1vh;
 }
 
 .image-cropper {
@@ -138,11 +190,11 @@ header {
 }
 
 #bioInput {
-    display: grid
+    display: grid;
 }
 
 #bioInput input {
-    min-height: 10vh
+    min-height: 10vh;
 }
 
 #profilePic {
@@ -165,7 +217,7 @@ header {
 }
 
 #profile img {
-    height: 100%
+    height: 100%;
 }
 
 #uploadPic {
@@ -187,7 +239,7 @@ header {
 }
 
 #uploadPic a:hover {
-    cursor: pointer
+    cursor: pointer;
 }
 
 #uploadPic h2 {
@@ -211,7 +263,7 @@ header {
 }
 
 #pictureChoose button {
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
     cursor: pointer;
 }
@@ -224,14 +276,14 @@ header {
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
 }
 
 #header {
     margin-top: 6vh;
     justify-self: center;
-    font-family: 'Quattrocento', serif;
+    font-family: "Quattrocento", serif;
     font-size: 8vw;
     color: #004258;
 }
@@ -239,41 +291,41 @@ header {
 .welcome {
     display: grid;
     grid-template-rows: repeat(3, auto);
-    justify-content: center
+    justify-content: center;
 }
 
 #registerButton {
-    font-family: 'Quattrocento', serif;
+    font-family: "Quattrocento", serif;
 }
 
 #registerButton button {
     height: 4vh;
     margin-left: 6vh;
-    background-color: #00364A;
+    background-color: #00364a;
     color: white;
 }
 
 #registerButton a {
-    text-decoration: none
+    text-decoration: none;
 }
 
 #loginMember {
-    font-family: 'Quattrocento', serif;
+    font-family: "Quattrocento", serif;
 }
 
 #loginMember button {
     height: 4vh;
-    background-color: #00364A;
+    background-color: #00364a;
     color: white;
 }
 
 #loginMember a {
-    text-decoration: none
+    text-decoration: none;
 }
 
 #slogan {
     margin-top: 8vh;
-    font-family: 'Quattrocento', serif;
+    font-family: "Quattrocento", serif;
     justify-self: center;
     font-size: 25px;
 }
@@ -305,14 +357,14 @@ header {
 }
 
 .loginError {
-    font-family: 'Quattrocento', serif;
+    font-family: "Quattrocento", serif;
     position: fixed;
     top: 11vh;
     right: 40%;
 }
 
 .postError {
-    font-family: 'Quattrocento', serif;
+    font-family: "Quattrocento", serif;
     position: fixed;
     top: 11vh;
 }
@@ -326,7 +378,7 @@ header {
 }
 
 ::placeholder {
-    text-align: center
+    text-align: center;
 }
 
 .friendshipButtons button {
@@ -335,7 +387,7 @@ header {
     border-radius: 5px;
     padding: 6px;
     text-decoration: none;
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
 }
 
@@ -343,7 +395,7 @@ header {
     border-radius: 5px;
     padding: 6px;
     text-decoration: none;
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
     position: absolute;
     top: 10vh;
@@ -355,18 +407,18 @@ header {
 
 #userUrl {
     text-decoration: none;
-    color: #003E53;
+    color: #003e53;
 }
 
 #friendsListLink {
     border-radius: 5px;
     padding: 6px;
     text-decoration: none;
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
     position: absolute;
     top: 6vh;
-    right: 9vw
+    right: 9vw;
 }
 
 #friendList button {
@@ -374,21 +426,21 @@ header {
     border-radius: 5px;
     padding: 6px;
     text-decoration: none;
-    background-color: #003E53;
+    background-color: #003e53;
     color: white;
 }
 
 #friendList p {
-    text-align: center
+    text-align: center;
 }
 
 #friendList #notation {
     margin-bottom: 5vh;
     padding-top: 3vh;
     text-align: center;
-    color: #003E53;
+    color: #003e53;
     font-size: 27px;
-    font-family: 'Quattrocento';
+    font-family: "Quattrocento";
 }
 
 .friends {
@@ -406,13 +458,13 @@ header {
 .friends img {
     border-radius: 2vh;
     height: 15vh;
-    width: 15vh
+    width: 15vh;
 }
 
 .notFriends img {
     border-radius: 2vh;
     height: 15vh;
-    width: 15vh
+    width: 15vh;
 }
 
 .friends div {
@@ -426,5 +478,5 @@ header {
 /* online */
 
 #onlineUsers img {
-    height: 10vh
+    height: 10vh;
 }

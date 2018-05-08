@@ -6,6 +6,7 @@ import { Profilepic } from "./profilepic";
 import { Profile } from "./profile";
 import { Upload } from "./upload";
 import { OtherProfile } from "./otherprofile";
+import Chat from "./chat.js";
 import Friends from "./friends";
 import Online from "./online";
 
@@ -139,7 +140,6 @@ export class App extends React.Component {
                             />
                         )}
                     </header>
-
                     <BrowserRouter>
                         <div>
                             {this.state.searchUsers && (
@@ -199,6 +199,11 @@ export class App extends React.Component {
                                             Who's online?
                                         </Link>
                                     </li>
+                                    <li id="dropdown-list">
+                                        <Link id="dropdown-link" to="/chat">
+                                            Messenger
+                                        </Link>
+                                    </li>
                                 </div>
                             </div>
 
@@ -214,6 +219,7 @@ export class App extends React.Component {
                                 path="/"
                                 render={() => <Profile {...this.state} />}
                             />
+                            <Route exact path="/chat" component={Chat} />
                         </div>
                     </BrowserRouter>
                 </div>

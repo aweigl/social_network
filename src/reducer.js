@@ -36,5 +36,17 @@ export const reducer = (state = {}, action) => {
         );
         return { ...state, onlineUserList };
     }
+    if (action.type == "CHAT_MESSAGES") {
+        let { chatMessages } = action;
+        return { ...state, chatMessages };
+    }
+    if (action.type == "SOMEONE_TYPING") {
+        let { typer } = action;
+        return { ...state, typer };
+    }
+    if (action.type == "CLEAR_TYPING") {
+        let { typer } = action;
+        return { ...state, typer };
+    }
     return state;
 };

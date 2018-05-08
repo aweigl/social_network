@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server, {
-    origins: "localhost:8080 || 192.168.50.155:8080"
+    origins: "localhost:8080 192.168.50.155:8080"
 });
 const compression = require("compression");
 const bodyParser = require("body-parser");
@@ -92,7 +92,7 @@ app.use(express.static(__dirname + "/public"));
 ////LOGIN REQUIRED///////
 function requireLogin(req, res, next) {
     if (!req.session.userId) {
-        res.sendStatus(403);
+        res.redirect("/welcome");
     } else {
         next();
     }
@@ -352,6 +352,7 @@ app.get("*", requireLogin, (req, res) => {
 });
 
 let onlineUserList = [];
+let chatMessages = [];
 
 io.on("connection", socket => {
     let session = socket.request.session;
@@ -375,6 +376,61 @@ io.on("connection", socket => {
     getUserInfo(session.userId).then(response => {
         socket.broadcast.emit("userJoined", {
             newUser: response.rows[0]
+        });
+    });
+
+    socket.emit("chatMessages", { chatMessages });
+
+    socket.on("newChatMessage", data => {
+        getUserInfo(session.userId).then(response => {
+            function formatDate(date) {
+                const monthNames = [
+                    "January",
+                    "February",
+                    "March",
+                    "April",
+                    "May",
+                    "June",
+                    "July",
+                    "August",
+                    "September",
+                    "October",
+                    "November",
+                    "December"
+                ];
+
+                let day = date.getDate();
+                let monthIndex = date.getMonth();
+                let year = date.getFullYear();
+
+                return `${day} ${monthNames[monthIndex]} ${year}`;
+            }
+
+            let chatUser = {
+                key: new Date(),
+                id: response.rows[0].id,
+                first: response.rows[0].first,
+                last: response.rows[0].last,
+                profilepic: response.rows[0].profilepic,
+                message: data,
+                timestamp: formatDate(new Date())
+            };
+            chatMessages.push(chatUser);
+            if (chatMessages.length > 10) {
+                chatMessages.shift();
+                io.emit("chatMessages", { chatMessages });
+            } else {
+                io.emit("chatMessages", { chatMessages });
+            }
+        });
+    });
+
+    socket.on("typing", () => {
+        getUserInfo(session.userId).then(response => {
+            io.emit("typing", {
+                first: response.rows[0].first,
+                last: response.rows[0].last
+            });
         });
     });
 
