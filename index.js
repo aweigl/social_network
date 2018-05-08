@@ -434,6 +434,10 @@ io.on("connection", socket => {
         });
     });
 
+    socket.on("clearTyping", () => {
+        io.emit("clearTyping");
+    });
+
     socket.on("disconnect", () => {
         console.log(`${session.userId} disconnected`);
         onlineUserList = onlineUserList.filter(

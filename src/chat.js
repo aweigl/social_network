@@ -17,7 +17,7 @@ class Chat extends React.Component {
                     socketEmit("newChatMessage", this.chatMessage);
                     this.chatMessage = null;
                     chatField.value = "";
-                    this.props.dispatch(clearTyping());
+                    socketEmit("clearTyping", {});
                 }
             }
         });

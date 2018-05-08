@@ -4,7 +4,8 @@ import {
     userJoined,
     userLeft,
     chatMessages,
-    typing
+    typing,
+    clearTyping
 } from "./actions";
 
 let socket;
@@ -29,6 +30,9 @@ export default function init(store) {
         });
         socket.on("typing", data => {
             store.dispatch(typing(data));
+        });
+        socket.on("clearTyping", () => {
+            store.dispatch(clearTyping());
         });
     }
     return socket;
