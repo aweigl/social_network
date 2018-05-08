@@ -7,7 +7,7 @@ class Chat extends React.Component {
     componentDidMount() {
         let chatField = document.getElementById("chatField");
 
-        chatField.addEventListener("keyup", e => {
+        chatField.addEventListener("keydown", e => {
             if (e.keyCode == 13) {
                 if (chatField.value.trim() == "") {
                     return null;
@@ -20,6 +20,13 @@ class Chat extends React.Component {
                     socketEmit("clearTyping", {});
                 }
             }
+        });
+
+        document.addEventListener("keydown", e => {
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                socketEmit("clearTyping", {});
+            }, 3000);
         });
     }
     componentDidUpdate() {
