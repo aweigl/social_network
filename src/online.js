@@ -12,11 +12,13 @@ class Online extends React.Component {
             return (
                 <div id="onlineDivs">
                     {onlineUserList.map(user => (
-                        <div key={user.id} id="onlineUsers">
-                            <img src={user.profilepic} />
-                            {!user.profilepic && <img src="default.png" />}
-                            {user.first} {user.last}
-                        </div>
+                        <Link to={`user/${user.id}`}>
+                            <div key={user.id} id="onlineUsers">
+                                <img src={user.profilepic} />
+                                {!user.profilepic && <img src="default.png" />}
+                                {user.first} {user.last}
+                            </div>
+                        </Link>
                     ))}
                 </div>
             );

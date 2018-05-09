@@ -383,28 +383,7 @@ io.on("connection", socket => {
 
     socket.on("newChatMessage", data => {
         getUserInfo(session.userId).then(response => {
-            function formatDate(date) {
-                const monthNames = [
-                    "January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                    "August",
-                    "September",
-                    "October",
-                    "November",
-                    "December"
-                ];
-
-                let day = date.getDate();
-                let monthIndex = date.getMonth();
-                let year = date.getFullYear();
-
-                return `${day} ${monthNames[monthIndex]} ${year}`;
-            }
+            const date = new Date();
 
             let chatUser = {
                 key: new Date(),
@@ -413,7 +392,7 @@ io.on("connection", socket => {
                 last: response.rows[0].last,
                 profilepic: response.rows[0].profilepic,
                 message: data,
-                timestamp: formatDate(new Date())
+                timestamp: date.toLocaleString()
             };
             chatMessages.push(chatUser);
             if (chatMessages.length > 10) {

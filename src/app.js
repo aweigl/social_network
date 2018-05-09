@@ -71,7 +71,7 @@ export class App extends React.Component {
                 this.closePictureUpload();
             }
         });
-        window.addEventListener("mousedown", e => {
+        window.addEventListener("click", e => {
             if (e.target != document.getElementsByTagName("#userResult")) {
                 this.setState({
                     searchUsers: null

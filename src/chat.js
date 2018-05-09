@@ -14,7 +14,6 @@ class Chat extends React.Component {
                     return null;
                 } else {
                     e.preventDefault();
-                    console.log(this.chatMessage);
                     socketEmit("newChatMessage", this.chatMessage);
                     this.chatMessage = null;
                     chatField.value = "";
@@ -74,15 +73,25 @@ class Chat extends React.Component {
                                                 className="chatPic"
                                                 src={user.profilepic}
                                             />
-                                            <p id="chatUser">
-                                                <Link to={`user/${user.id}`}>
-                                                    {user.first} {user.last}
-                                                </Link>
-                                            </p>
+                                            <div id="nameTime">
+                                                <p id="chatUser">
+                                                    <Link
+                                                        id="link"
+                                                        ref={item =>
+                                                            (this.link = item)
+                                                        }
+                                                        to={`user/${user.id}`}
+                                                    >
+                                                        {user.first} {user.last}
+                                                    </Link>
+                                                </p>
+                                                <p id="timestamp">
+                                                    {user.timestamp}
+                                                </p>
+                                            </div>
                                         </div>
 
                                         <p id="message">{user.message}</p>
-                                        <p id="timestamp">{user.timestamp}</p>
                                     </div>
                                 );
                             })}
