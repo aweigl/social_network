@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server, {
-    origins: `localhost:8080 192.168.50.155:8080 https://aweigl-social-network.herokuapp.com/*`
+    origins: `https://aweigl-social-network.herokuapp.com`
 });
+const port = process.env.PORT || 8080;
 const compression = require("compression");
 const bodyParser = require("body-parser");
 const {
@@ -434,8 +435,6 @@ io.on("connection", socket => {
         }
     });
 });
-
-const port = process.env.PORT || 8080;
 
 server.listen(port, () => {
     console.log("I'm listening.");
