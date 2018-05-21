@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server, {
-    origins: "localhost:8080 192.168.50.155:8080"
+    origins: `localhost:8080 192.168.50.155:8080 ${process.env.PORT}`
 });
 const compression = require("compression");
 const bodyParser = require("body-parser");
