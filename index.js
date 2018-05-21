@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server, {
-    origins: `https://aweigl-social-network.herokuapp.com`
+    origins: "*:*"
 });
+
 const port = process.env.PORT || 8080;
 const compression = require("compression");
 const bodyParser = require("body-parser");
